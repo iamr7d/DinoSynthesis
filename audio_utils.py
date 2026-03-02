@@ -191,48 +191,6 @@ def hifi_griffinlim(spec_01: np.ndarray,
 # 3. Save WAV to path
 # ─────────────────────────────────────────────────────────────────────────────
 
-
-def frequency_reshape(spec: np.ndarray,
-                      boost_below_hz: float = 400.0,
-                      boost_db: float = 8.0,
-                      cut_above_hz: float = 2000.0,
-                      cut_db: float = 12.0) -> np.ndarray:
-    """
-    Mel-band frequency emphasis curve for large-body vocalization.
-
-    Boosts sub-400 Hz bins (infrasonic body resonance) and rolls off
-    above 2 kHz (suppresses avian sibilance / decoder HF bias).
-    Applies a linearly-interpolated gain curve per mel bin in the dB
-    domain, then renormalises the result back to [0, 1].
-
-    Args:
-        spec           : (n_mels, T) float32 in [0, 1]
-        boost_below_hz : Frequency below which to apply full boost (Hz)
-        boost_db       : Gain in dB to apply below boost_below_hz
-        cut_above_hz   : Frequency above which to apply full cut (Hz)
-        cut_db         : Attenuation in dB to apply above cut_above_hz
-    Returns:
-        Reshaped (n_mels, T) float32 in [0, 1]
-    """
-    freqs    = librosa.mel_frequencies(n_mels=spec.shape[0], fmin=0.0, fmax=SR/2)
-    gain_db  = np.zeros(spec.shape[0], dtype=np.float32)
-    for i, f in enumerate(freqs):
-        if f <= boost_below_hz:
-            gain_db[i] = boost_db
-        elif f <= cut_above_hz:
-            t           = (f - boost_below_hz) / (cut_above_hz - boost_below_hz)
-            gain_db[i]  = boost_db + t * (-cut_db - boost_db)
-        else:
-            gain_db[i]  = -cut_db
-
-    gain_lin = 10 ** (gain_db / 20.0)              # (n_mels,)
-    out      = spec * gain_lin[:, np.newaxis]       # broadcast over time
-    out      = np.clip(out, 0.0, None)
-    vmax     = out.max()
-    if vmax > 1e-6:
-        out /= vmax
-    return out.astype(np.float32)
-
 def save_wav(spec_01: np.ndarray, out_path: str,
              n_iter: int = 128,
              preemphasis_coef: float = 0.97,

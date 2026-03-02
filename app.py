@@ -27,7 +27,7 @@ from sklearn.decomposition import PCA
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 from model.dino_vae import DinoVAE
-from audio_utils import wav_bytes, spec_to_png_b64, frequency_reshape, SR, N_FFT, HOP_LENGTH, N_MELS
+from audio_utils import wav_bytes, spec_to_png_b64, SR, N_FFT, HOP_LENGTH, N_MELS
 from image_gen_local import generate as img_generate, build_prompt as img_build_prompt
 from audio_polish import organic_polish
 
@@ -356,11 +356,11 @@ def api_synth_from_pca():
         px = float(data["x"])
         py = float(data["y"])
         pz = float(data.get("z", 0.0))
-        sharpness = float(data.get("sharpness", 0.0))
-        gate      = float(data.get("gate", 0.10))
-        sobel     = float(data.get("sobel_strength", 0.35))
-        preemph   = float(data.get("preemphasis", 0.0))
-        t_smooth  = float(data.get("temporal_smooth", 0.7))
+        sharpness = float(data.get("sharpness", 1.8))
+        gate      = float(data.get("gate", 0.15))
+        sobel     = float(data.get("sobel_strength", 0.0))
+        preemph   = float(data.get("preemphasis", 0.97))
+        t_smooth  = float(data.get("temporal_smooth", 1.0))
     except (KeyError, TypeError, ValueError) as e:
         return jsonify({"error": f"Bad request: {e}"}), 400
 
@@ -375,12 +375,6 @@ def api_synth_from_pca():
     with torch.no_grad():
         recon = model.decode(z_tensor)                                       # (1,1,128,256)
     spec = recon.squeeze().cpu().numpy()
-    spec = (spec + 1.0) / 2.0   # [-1,1] → [0,1] if needed
-    spec = np.clip(spec, 0.0, 1.0)
-
-    # Apply frequency reshape for dino-appropriate timbre
-    spec = frequency_reshape(spec, boost_below_hz=400, boost_db=8,
-                             cut_above_hz=1800, cut_db=14)
 
     wav_b64  = base64.b64encode(
         wav_bytes(spec, n_iter=128, sharpness=sharpness,
@@ -418,11 +412,11 @@ def api_polish():
         # Apply organic polish
         y_polished = organic_polish(
             y, sr=sr,
-            attack_ms=float(data.get("attack_ms", 250)),
-            release_ms=float(data.get("release_ms", 800)),
-            lpf_hz=float(data.get("lpf_hz", 700)),
-            sub_blend=float(data.get("sub_blend", 0.40)),
-            delay_ms=float(data.get("delay_ms", 60)),
+            attack_ms=float(data.get("attack_ms", 150)),
+            release_ms=float(data.get("release_ms", 300)),
+            lpf_hz=float(data.get("lpf_hz", 3500)),
+            sub_blend=float(data.get("sub_blend", 0.3)),
+            delay_ms=float(data.get("delay_ms", 40)),
             delay_blend=float(data.get("delay_blend", 0.15))
         )
         
@@ -448,11 +442,11 @@ def api_synthesize():
         w_bird    = float(request.form.get("w_bird",  0.0))
         w_croc    = float(request.form.get("w_croc",  0.0))
         w_mass    = float(request.form.get("w_mass",  0.0))
-        sharpness = float(request.form.get("sharpness", 0.0))
-        preemph   = float(request.form.get("preemphasis", 0.0))
-        gate      = float(request.form.get("gate", 0.10))
-        sobel     = float(request.form.get("sobel_strength", 0.35))
-        t_smooth  = float(request.form.get("temporal_smooth", 0.7))
+        sharpness = float(request.form.get("sharpness", 1.5))
+        preemph   = float(request.form.get("preemphasis", 0.97))
+        gate      = float(request.form.get("gate", 0.0))
+        sobel     = float(request.form.get("sobel_strength", 0.0))
+        t_smooth  = float(request.form.get("temporal_smooth", 0.0))
         jitter    = float(request.form.get("jitter", 0.0))
         n_jitter  = max(1, int(request.form.get("n_jitter", 6)))
     except ValueError:
@@ -514,12 +508,6 @@ def api_synthesize():
         with torch.no_grad():
             recon = model.decode(z_blend.unsqueeze(0))
         synth_spec = recon.squeeze().cpu().numpy()   # (128,256)
-
-    # Normalise [-1,1] → [0,1] and apply frequency reshape
-    synth_spec = (synth_spec + 1.0) / 2.0
-    synth_spec = np.clip(synth_spec, 0.0, 1.0)
-    synth_spec = frequency_reshape(synth_spec, boost_below_hz=400, boost_db=8,
-                                   cut_above_hz=1800, cut_db=14)
 
     # ── Render outputs ────────────────────────────────────────────
     wav_kw  = dict(sharpness=sharpness, preemphasis_coef=preemph,
