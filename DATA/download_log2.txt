@@ -1,0 +1,691 @@
+Initializing Dino-VAE Data Pipeline (Expanded Download)...
+
+==================================================
+Searching Xeno-Canto for: Cassowary  (query: gen:Casuarius q:">D")
+    Page 1/1 — 31 recordings
+  → 31 recordings found. Starting download...
+  [skip] Cassowary_126083.mp3 already exists.
+  [skip] Cassowary_1066434.mp3 already exists.
+  [skip] Cassowary_1066433.mp3 already exists.
+  [skip] Cassowary_1066432.mp3 already exists.
+  [skip] Cassowary_404787.mp3 already exists.
+  [skip] Cassowary_316215.mp3 already exists.
+  [skip] Cassowary_316214.mp3 already exists.
+  [skip] Cassowary_276905.mp3 already exists.
+  [skip] Cassowary_158488.mp3 already exists.
+  [skip] Cassowary_143429.mp3 already exists.
+  [skip] Cassowary_140150.mp3 already exists.
+  [skip] Cassowary_132934.mp3 already exists.
+  [skip] Cassowary_125292.mp3 already exists.
+  [skip] Cassowary_125291.mp3 already exists.
+  [skip] Cassowary_120893.mp3 already exists.
+  [dl]   Cassowary_482590.mp3  (quality: C, length: 0:19)
+  [dl]   Cassowary_337534.mp3  (quality: C, length: 0:17)
+  [dl]   Cassowary_335574.mp3  (quality: C, length: 0:05)
+  [dl]   Cassowary_276900.mp3  (quality: C, length: 0:39)
+  [dl]   Cassowary_194118.mp3  (quality: C, length: 1:19)
+  [dl]   Cassowary_168205.mp3  (quality: C, length: 1:34)
+  [dl]   Cassowary_158564.mp3  (quality: C, length: 2:28)
+  [dl]   Cassowary_143430.mp3  (quality: C, length: 0:02)
+  [skip] Cassowary_524398.mp3 already exists.
+  [dl]   Cassowary_590323.mp3  (quality: C, length: 0:15)
+  [skip] Cassowary_498017.mp3 already exists.
+  [skip] Cassowary_498016.mp3 already exists.
+  [skip] Cassowary_558583.mp3 already exists.
+  [skip] Cassowary_498015.mp3 already exists.
+  [skip] Cassowary_209609.mp3 already exists.
+  [dl]   Cassowary_558582.mp3  (quality: C, length: 0:10)
+
+==================================================
+Searching Xeno-Canto for: Emu  (query: gen:Dromaius q:">D")
+    Page 1/1 — 20 recordings
+  → 20 recordings found. Starting download...
+  [skip] Emu_825159.mp3 already exists.
+  [skip] Emu_597154.mp3 already exists.
+  [skip] Emu_287026.mp3 already exists.
+  [skip] Emu_233818.mp3 already exists.
+  [skip] Emu_195089.mp3 already exists.
+  [skip] Emu_132935.mp3 already exists.
+  [skip] Emu_881663.mp3 already exists.
+  [skip] Emu_681004.mp3 already exists.
+  [skip] Emu_597155.mp3 already exists.
+  [skip] Emu_577709.mp3 already exists.
+  [skip] Emu_575654.mp3 already exists.
+  [skip] Emu_343777.mp3 already exists.
+  [skip] Emu_171789.mp3 already exists.
+  [skip] Emu_113130.mp3 already exists.
+  [dl]   Emu_938430.mp3  (quality: C, length: 1:13)
+  [dl]   Emu_575653.mp3  (quality: C, length: 0:47)
+  [dl]   Emu_326393.mp3  (quality: C, length: 0:08)
+  [dl]   Emu_287027.mp3  (quality: C, length: 0:36)
+  [dl]   Emu_243487.mp3  (quality: C, length: 0:13)
+  [dl]   Emu_233817.mp3  (quality: C, length: 0:09)
+
+==================================================
+Searching Xeno-Canto for: Ostrich  (query: gen:Struthio q:">D")
+    Page 1/1 — 45 recordings
+  → 45 recordings found. Starting download...
+  [skip] Ostrich_1080577.mp3 already exists.
+  [skip] Ostrich_1080575.mp3 already exists.
+  [skip] Ostrich_1080574.mp3 already exists.
+  [skip] Ostrich_845947.mp3 already exists.
+  [skip] Ostrich_845946.mp3 already exists.
+  [skip] Ostrich_845945.mp3 already exists.
+  [skip] Ostrich_845942.mp3 already exists.
+  [skip] Ostrich_845940.mp3 already exists.
+  [skip] Ostrich_845936.mp3 already exists.
+  [skip] Ostrich_845935.mp3 already exists.
+  [skip] Ostrich_845933.mp3 already exists.
+  [skip] Ostrich_845931.mp3 already exists.
+  [skip] Ostrich_845930.mp3 already exists.
+  [skip] Ostrich_845929.mp3 already exists.
+  [skip] Ostrich_845928.mp3 already exists.
+  [skip] Ostrich_845927.mp3 already exists.
+  [skip] Ostrich_845925.mp3 already exists.
+  [skip] Ostrich_845920.mp3 already exists.
+  [skip] Ostrich_834116.mp3 already exists.
+  [skip] Ostrich_834114.mp3 already exists.
+  [skip] Ostrich_516153.mp3 already exists.
+  [skip] Ostrich_46725.mp3 already exists.
+  [skip] Ostrich_1080576.mp3 already exists.
+  [skip] Ostrich_1080573.mp3 already exists.
+  [skip] Ostrich_1059946.mp3 already exists.
+  [skip] Ostrich_845956.mp3 already exists.
+  [skip] Ostrich_845955.mp3 already exists.
+  [skip] Ostrich_845954.mp3 already exists.
+  [skip] Ostrich_845953.mp3 already exists.
+  [skip] Ostrich_845949.mp3 already exists.
+  [skip] Ostrich_845948.mp3 already exists.
+  [skip] Ostrich_845944.mp3 already exists.
+  [skip] Ostrich_845943.mp3 already exists.
+  [skip] Ostrich_845941.mp3 already exists.
+  [skip] Ostrich_845939.mp3 already exists.
+  [skip] Ostrich_845938.mp3 already exists.
+  [skip] Ostrich_845937.mp3 already exists.
+  [skip] Ostrich_845934.mp3 already exists.
+  [skip] Ostrich_845932.mp3 already exists.
+  [skip] Ostrich_834115.mp3 already exists.
+  [skip] Ostrich_208209.mp3 already exists.
+  [dl]   Ostrich_673753.mp3  (quality: C, length: 0:11)
+  [dl]   Ostrich_563003.mp3  (quality: C, length: 0:09)
+  [dl]   Ostrich_208128.mp3  (quality: C, length: 0:04)
+  [skip] Ostrich_292043.mp3 already exists.
+
+==================================================
+Searching Xeno-Canto for: Rhea  (query: gen:Rhea q:">D")
+    Page 1/1 — 27 recordings
+  → 27 recordings found. Starting download...
+  [skip] Rhea_1016004.mp3 already exists.
+  [skip] Rhea_201498.mp3 already exists.
+  [skip] Rhea_191451.mp3 already exists.
+  [skip] Rhea_51833.mp3 already exists.
+  [skip] Rhea_49632.mp3 already exists.
+  [skip] Rhea_45555.mp3 already exists.
+  [skip] Rhea_1016005.mp3 already exists.
+  [skip] Rhea_993748.mp3 already exists.
+  [skip] Rhea_229054.mp3 already exists.
+  [skip] Rhea_191450.mp3 already exists.
+  [skip] Rhea_127145.mp3 already exists.
+  [skip] Rhea_54184.mp3 already exists.
+  [skip] Rhea_51832.mp3 already exists.
+  [skip] Rhea_37806.mp3 already exists.
+  [dl]   Rhea_686584.mp3  (quality: C, length: 0:09)
+  [dl]   Rhea_229055.mp3  (quality: C, length: 0:03)
+  [dl]   Rhea_229053.mp3  (quality: C, length: 0:16)
+  [dl]   Rhea_108649.mp3  (quality: C, length: 0:17)
+  [dl]   Rhea_54183.mp3  (quality: C, length: 0:08)
+  [dl]   Rhea_51834.mp3  (quality: C, length: 0:05)
+  [dl]   Rhea_37805.mp3  (quality: C, length: 0:01)
+  [dl]   Rhea_37804.mp3  (quality: C, length: 0:01)
+  [skip] Rhea_304506.mp3 already exists.
+  [skip] Rhea_939456.mp3 already exists.
+  [skip] Rhea_90569.mp3 already exists.
+  [skip] Rhea_89244.mp3 already exists.
+  [dl]   Rhea_543987.mp3  (quality: C, length: 0:12)
+
+==================================================
+Searching Xeno-Canto for: Kiwi  (query: gen:Apteryx q:">D")
+    Page 1/1 — 45 recordings
+  → 45 recordings found. Starting download...
+  [skip] Kiwi_525925.mp3 already exists.
+  [skip] Kiwi_955810.mp3 already exists.
+  [skip] Kiwi_794785.mp3 already exists.
+  [skip] Kiwi_668545.mp3 already exists.
+  [skip] Kiwi_526191.mp3 already exists.
+  [skip] Kiwi_526190.mp3 already exists.
+  [skip] Kiwi_526189.mp3 already exists.
+  [skip] Kiwi_521536.mp3 already exists.
+  [skip] Kiwi_794786.mp3 already exists.
+  [skip] Kiwi_638202.mp3 already exists.
+  [skip] Kiwi_638200.mp3 already exists.
+  [skip] Kiwi_526192.mp3 already exists.
+  [skip] Kiwi_526188.mp3 already exists.
+  [skip] Kiwi_526186.mp3 already exists.
+  [skip] Kiwi_526185.mp3 already exists.
+  [skip] Kiwi_526184.mp3 already exists.
+  [skip] Kiwi_521538.mp3 already exists.
+  [skip] Kiwi_521537.mp3 already exists.
+  [skip] Kiwi_521535.mp3 already exists.
+  [skip] Kiwi_348749.mp3 already exists.
+  [dl]   Kiwi_956516.mp3  (quality: C, length: 0:15)
+  [dl]   Kiwi_955811.mp3  (quality: C, length: 0:21)
+  [dl]   Kiwi_525927.mp3  (quality: C, length: 0:09)
+  [dl]   Kiwi_525926.mp3  (quality: C, length: 0:04)
+  [dl]   Kiwi_444283.mp3  (quality: C, length: 0:27)
+  [skip] Kiwi_356323.mp3 already exists.
+  [skip] Kiwi_356322.mp3 already exists.
+  [skip] Kiwi_356321.mp3 already exists.
+  [skip] Kiwi_311777.mp3 already exists.
+  [dl]   Kiwi_236298.mp3  (quality: C, length: 0:05)
+  [skip] Kiwi_958221.mp3 already exists.
+  [skip] Kiwi_152944.mp3 already exists.
+  [skip] Kiwi_33754.mp3 already exists.
+  [skip] Kiwi_952952.mp3 already exists.
+  [skip] Kiwi_182608.mp3 already exists.
+  [skip] Kiwi_88143.mp3 already exists.
+  [dl]   Kiwi_958222.mp3  (quality: C, length: 0:10)
+  [dl]   Kiwi_952953.mp3  (quality: C, length: 0:10)
+  [dl]   Kiwi_498079.mp3  (quality: C, length: 0:27)
+  [skip] Kiwi_666024.mp3 already exists.
+  [dl]   Kiwi_579690.mp3  (quality: C, length: 1:08)
+  [dl]   Kiwi_444298.mp3  (quality: C, length: 0:31)
+  [dl]   Kiwi_345367.mp3  (quality: C, length: 0:21)
+  [dl]   Kiwi_114351.mp3  (quality: C, length: 0:25)
+  [dl]   Kiwi_114337.mp3  (quality: C, length: 0:14)
+
+==================================================
+Searching Xeno-Canto for: Tinamou_Tinamus  (query: gen:Tinamus q:">D")
+    Page 1/1 — 332 recordings
+  → 332 recordings found. Starting download...
+  [dl]   Tinamou_Tinamus_1044945.mp3  (quality: A, length: 0:06)
+  [dl]   Tinamou_Tinamus_1044626.mp3  (quality: A, length: 0:28)
+  [dl]   Tinamou_Tinamus_597722.mp3  (quality: A, length: 0:50)
+  [dl]   Tinamou_Tinamus_318739.mp3  (quality: A, length: 0:27)
+  [dl]   Tinamou_Tinamus_236216.mp3  (quality: A, length: 3:43)
+  [dl]   Tinamou_Tinamus_217695.mp3  (quality: A, length: 0:47)
+  [dl]   Tinamou_Tinamus_3145.mp3  (quality: A, length: 0:04)
+  [dl]   Tinamou_Tinamus_816988.mp3  (quality: B, length: 0:03)
+  [dl]   Tinamou_Tinamus_755231.mp3  (quality: B, length: 0:04)
+  [dl]   Tinamou_Tinamus_755226.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_708505.mp3  (quality: B, length: 0:08)
+  [dl]   Tinamou_Tinamus_564679.mp3  (quality: B, length: 0:06)
+  [dl]   Tinamou_Tinamus_557622.mp3  (quality: B, length: 0:48)
+  [dl]   Tinamou_Tinamus_557618.mp3  (quality: B, length: 0:20)
+  [dl]   Tinamou_Tinamus_537901.mp3  (quality: B, length: 0:27)
+  [dl]   Tinamou_Tinamus_537897.mp3  (quality: B, length: 0:21)
+  [dl]   Tinamou_Tinamus_497975.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_428202.mp3  (quality: B, length: 0:26)
+  [dl]   Tinamou_Tinamus_289850.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_231261.mp3  (quality: B, length: 0:34)
+  [dl]   Tinamou_Tinamus_231253.mp3  (quality: B, length: 0:09)
+  [dl]   Tinamou_Tinamus_209067.mp3  (quality: B, length: 0:49)
+  [dl]   Tinamou_Tinamus_209066.mp3  (quality: B, length: 0:56)
+  [dl]   Tinamou_Tinamus_176277.mp3  (quality: B, length: 3:53)
+  [dl]   Tinamou_Tinamus_176263.mp3  (quality: B, length: 4:07)
+  [dl]   Tinamou_Tinamus_157425.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_91214.mp3  (quality: B, length: 0:21)
+  [dl]   Tinamou_Tinamus_64283.mp3  (quality: B, length: 0:31)
+  [dl]   Tinamou_Tinamus_64282.mp3  (quality: B, length: 1:26)
+  [dl]   Tinamou_Tinamus_6189.mp3  (quality: B, length: 0:08)
+  [dl]   Tinamou_Tinamus_3119.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_953398.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_862962.mp3  (quality: C, length: 0:45)
+  [dl]   Tinamou_Tinamus_840280.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_830684.mp3  (quality: C, length: 0:29)
+  [dl]   Tinamou_Tinamus_690055.mp3  (quality: C, length: 0:29)
+  [dl]   Tinamou_Tinamus_483178.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_460667.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_427686.mp3  (quality: C, length: 0:58)
+  [dl]   Tinamou_Tinamus_395760.mp3  (quality: C, length: 0:07)
+  [dl]   Tinamou_Tinamus_345458.mp3  (quality: C, length: 0:43)
+  [dl]   Tinamou_Tinamus_330075.mp3  (quality: C, length: 0:07)
+  [dl]   Tinamou_Tinamus_318740.mp3  (quality: C, length: 0:19)
+  [dl]   Tinamou_Tinamus_239095.mp3  (quality: C, length: 0:21)
+  [dl]   Tinamou_Tinamus_239094.mp3  (quality: C, length: 2:52)
+  [dl]   Tinamou_Tinamus_239093.mp3  (quality: C, length: 0:16)
+  [dl]   Tinamou_Tinamus_239092.mp3  (quality: C, length: 7:49)
+  [dl]   Tinamou_Tinamus_231259.mp3  (quality: C, length: 0:06)
+  [dl]   Tinamou_Tinamus_231257.mp3  (quality: C, length: 0:39)
+  [dl]   Tinamou_Tinamus_231256.mp3  (quality: C, length: 0:08)
+  [dl]   Tinamou_Tinamus_231255.mp3  (quality: C, length: 0:43)
+  [dl]   Tinamou_Tinamus_231254.mp3  (quality: C, length: 0:23)
+  [dl]   Tinamou_Tinamus_176977.mp3  (quality: C, length: 1:56)
+  [dl]   Tinamou_Tinamus_176340.mp3  (quality: C, length: 2:04)
+  [dl]   Tinamou_Tinamus_74276.mp3  (quality: C, length: 1:36)
+  [dl]   Tinamou_Tinamus_3135.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_1050604.mp3  (quality: A, length: 0:06)
+  [dl]   Tinamou_Tinamus_1043495.mp3  (quality: A, length: 0:04)
+  [dl]   Tinamou_Tinamus_1018701.mp3  (quality: A, length: 0:45)
+  [dl]   Tinamou_Tinamus_666443.mp3  (quality: A, length: 1:03)
+  [dl]   Tinamou_Tinamus_591392.mp3  (quality: A, length: 1:15)
+  [dl]   Tinamou_Tinamus_462182.mp3  (quality: A, length: 0:31)
+  [dl]   Tinamou_Tinamus_422786.mp3  (quality: A, length: 0:38)
+  [dl]   Tinamou_Tinamus_353537.mp3  (quality: A, length: 1:36)
+  [dl]   Tinamou_Tinamus_353525.mp3  (quality: A, length: 1:22)
+  [dl]   Tinamou_Tinamus_144378.mp3  (quality: A, length: 0:41)
+  [dl]   Tinamou_Tinamus_113213.mp3  (quality: A, length: 2:04)
+  [dl]   Tinamou_Tinamus_85442.mp3  (quality: A, length: 0:41)
+  [dl]   Tinamou_Tinamus_55899.mp3  (quality: A, length: 0:07)
+  [dl]   Tinamou_Tinamus_55898.mp3  (quality: A, length: 0:29)
+  [dl]   Tinamou_Tinamus_1053048.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_1027110.mp3  (quality: B, length: 0:03)
+  [dl]   Tinamou_Tinamus_810505.mp3  (quality: B, length: 0:18)
+  [dl]   Tinamou_Tinamus_795926.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_715527.mp3  (quality: B, length: 0:02)
+  [dl]   Tinamou_Tinamus_660666.mp3  (quality: B, length: 0:04)
+  [dl]   Tinamou_Tinamus_619043.mp3  (quality: B, length: 0:10)
+  [dl]   Tinamou_Tinamus_613866.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_595109.mp3  (quality: B, length: 0:19)
+  [dl]   Tinamou_Tinamus_556640.mp3  (quality: B, length: 0:04)
+  [dl]   Tinamou_Tinamus_552958.mp3  (quality: B, length: 0:13)
+  [dl]   Tinamou_Tinamus_549356.mp3  (quality: B, length: 0:52)
+  [dl]   Tinamou_Tinamus_521946.mp3  (quality: B, length: 0:22)
+  [dl]   Tinamou_Tinamus_505069.mp3  (quality: B, length: 0:02)
+  [dl]   Tinamou_Tinamus_422785.mp3  (quality: B, length: 1:41)
+  [dl]   Tinamou_Tinamus_326013.mp3  (quality: B, length: 0:51)
+  [dl]   Tinamou_Tinamus_287483.mp3  (quality: B, length: 0:35)
+  [dl]   Tinamou_Tinamus_278337.mp3  (quality: B, length: 0:17)
+  [dl]   Tinamou_Tinamus_278336.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_277175.mp3  (quality: B, length: 0:03)
+  [dl]   Tinamou_Tinamus_246805.mp3  (quality: B, length: 0:28)
+  [dl]   Tinamou_Tinamus_162272.mp3  (quality: B, length: 0:47)
+  [dl]   Tinamou_Tinamus_115877.mp3  (quality: B, length: 0:32)
+  [dl]   Tinamou_Tinamus_84830.mp3  (quality: B, length: 0:23)
+  [dl]   Tinamou_Tinamus_55897.mp3  (quality: B, length: 0:07)
+  [dl]   Tinamou_Tinamus_55896.mp3  (quality: B, length: 0:07)
+  [dl]   Tinamou_Tinamus_41870.mp3  (quality: B, length: 1:32)
+  [dl]   Tinamou_Tinamus_4273.mp3  (quality: B, length: 0:06)
+  [dl]   Tinamou_Tinamus_896032.mp3  (quality: C, length: 0:34)
+  [dl]   Tinamou_Tinamus_771791.mp3  (quality: C, length: 0:29)
+  [dl]   Tinamou_Tinamus_615158.mp3  (quality: C, length: 1:26)
+  [dl]   Tinamou_Tinamus_615156.mp3  (quality: C, length: 1:14)
+  [dl]   Tinamou_Tinamus_614772.mp3  (quality: C, length: 0:07)
+  [dl]   Tinamou_Tinamus_549355.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_527911.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_472076.mp3  (quality: C, length: 0:07)
+  [dl]   Tinamou_Tinamus_397296.mp3  (quality: C, length: 0:06)
+  [dl]   Tinamou_Tinamus_349414.mp3  (quality: C, length: 1:05)
+  [dl]   Tinamou_Tinamus_340067.mp3  (quality: C, length: 0:06)
+  [dl]   Tinamou_Tinamus_338589.mp3  (quality: C, length: 0:53)
+  [dl]   Tinamou_Tinamus_231250.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_217863.mp3  (quality: C, length: 0:42)
+  [dl]   Tinamou_Tinamus_203414.mp3  (quality: C, length: 1:02)
+  [dl]   Tinamou_Tinamus_198702.mp3  (quality: C, length: 0:08)
+  [dl]   Tinamou_Tinamus_188288.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_187295.mp3  (quality: C, length: 0:09)
+  [dl]   Tinamou_Tinamus_173433.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_148702.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_105785.mp3  (quality: C, length: 2:29)
+  [dl]   Tinamou_Tinamus_92072.mp3  (quality: C, length: 0:41)
+  [dl]   Tinamou_Tinamus_85231.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_57821.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_53553.mp3  (quality: C, length: 0:08)
+  [dl]   Tinamou_Tinamus_33320.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_14717.mp3  (quality: C, length: 0:12)
+  [dl]   Tinamou_Tinamus_706672.mp3  (quality: B, length: 0:13)
+  [dl]   Tinamou_Tinamus_701263.mp3  (quality: B, length: 0:19)
+  [dl]   Tinamou_Tinamus_474901.mp3  (quality: B, length: 1:33)
+  [dl]   Tinamou_Tinamus_350134.mp3  (quality: B, length: 0:10)
+  [dl]   Tinamou_Tinamus_1075130.mp3  (quality: C, length: 1:18)
+  [dl]   Tinamou_Tinamus_726317.mp3  (quality: C, length: 1:02)
+  [dl]   Tinamou_Tinamus_723672.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_722609.mp3  (quality: C, length: 0:06)
+  [dl]   Tinamou_Tinamus_722598.mp3  (quality: C, length: 0:04)
+  [dl]   Tinamou_Tinamus_396019.mp3  (quality: C, length: 1:17)
+  [dl]   Tinamou_Tinamus_244460.mp3  (quality: C, length: 0:23)
+  [dl]   Tinamou_Tinamus_239091.mp3  (quality: C, length: 0:20)
+  [dl]   Tinamou_Tinamus_62895.mp3  (quality: C, length: 0:16)
+  [dl]   Tinamou_Tinamus_1050491.mp3  (quality: A, length: 0:45)
+  [dl]   Tinamou_Tinamus_1046156.mp3  (quality: A, length: 0:24)
+  [dl]   Tinamou_Tinamus_1028543.mp3  (quality: A, length: 0:15)
+  [dl]   Tinamou_Tinamus_998172.mp3  (quality: A, length: 0:54)
+  [dl]   Tinamou_Tinamus_987209.mp3  (quality: A, length: 0:16)
+  [dl]   Tinamou_Tinamus_986563.mp3  (quality: A, length: 0:14)
+  [dl]   Tinamou_Tinamus_982176.mp3  (quality: A, length: 0:15)
+  [dl]   Tinamou_Tinamus_982175.mp3  (quality: A, length: 0:25)
+  [dl]   Tinamou_Tinamus_982174.mp3  (quality: A, length: 0:13)
+  [dl]   Tinamou_Tinamus_982173.mp3  (quality: A, length: 0:21)
+  [dl]   Tinamou_Tinamus_980749.mp3  (quality: A, length: 0:19)
+  [dl]   Tinamou_Tinamus_979867.mp3  (quality: A, length: 0:47)
+  [dl]   Tinamou_Tinamus_979865.mp3  (quality: A, length: 0:21)
+  [dl]   Tinamou_Tinamus_979864.mp3  (quality: A, length: 0:10)
+  [dl]   Tinamou_Tinamus_686892.mp3  (quality: A, length: 1:31)
+  [dl]   Tinamou_Tinamus_686179.mp3  (quality: A, length: 0:14)
+  [dl]   Tinamou_Tinamus_621784.mp3  (quality: A, length: 0:14)
+  [dl]   Tinamou_Tinamus_411236.mp3  (quality: A, length: 0:10)
+  [dl]   Tinamou_Tinamus_392986.mp3  (quality: A, length: 0:06)
+  [dl]   Tinamou_Tinamus_363937.mp3  (quality: A, length: 1:44)
+  [dl]   Tinamou_Tinamus_363225.mp3  (quality: A, length: 3:47)
+  [dl]   Tinamou_Tinamus_358477.mp3  (quality: A, length: 1:53)
+  [dl]   Tinamou_Tinamus_272385.mp3  (quality: A, length: 0:12)
+  [dl]   Tinamou_Tinamus_257240.mp3  (quality: A, length: 1:14)
+  [dl]   Tinamou_Tinamus_231237.mp3  (quality: A, length: 0:26)
+  [dl]   Tinamou_Tinamus_231236.mp3  (quality: A, length: 0:45)
+  [dl]   Tinamou_Tinamus_231235.mp3  (quality: A, length: 1:30)
+  [dl]   Tinamou_Tinamus_131553.mp3  (quality: A, length: 0:25)
+  [dl]   Tinamou_Tinamus_131552.mp3  (quality: A, length: 0:49)
+  [dl]   Tinamou_Tinamus_129750.mp3  (quality: A, length: 0:15)
+  [dl]   Tinamou_Tinamus_107758.mp3  (quality: A, length: 0:16)
+  [dl]   Tinamou_Tinamus_85067.mp3  (quality: A, length: 0:34)
+  [dl]   Tinamou_Tinamus_85066.mp3  (quality: A, length: 2:29)
+  [dl]   Tinamou_Tinamus_83256.mp3  (quality: A, length: 0:35)
+  [dl]   Tinamou_Tinamus_80529.mp3  (quality: A, length: 0:56)
+  [dl]   Tinamou_Tinamus_45159.mp3  (quality: A, length: 0:36)
+  [dl]   Tinamou_Tinamus_17471.mp3  (quality: A, length: 0:09)
+  [dl]   Tinamou_Tinamus_986718.mp3  (quality: B, length: 0:15)
+  [dl]   Tinamou_Tinamus_973627.mp3  (quality: B, length: 2:35)
+  [dl]   Tinamou_Tinamus_965394.mp3  (quality: B, length: 7:39)
+  [dl]   Tinamou_Tinamus_947776.mp3  (quality: B, length: 0:49)
+  [dl]   Tinamou_Tinamus_934742.mp3  (quality: B, length: 0:08)
+  [dl]   Tinamou_Tinamus_925556.mp3  (quality: B, length: 3:06)
+  [dl]   Tinamou_Tinamus_890988.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_812877.mp3  (quality: B, length: 1:03)
+  [dl]   Tinamou_Tinamus_812876.mp3  (quality: B, length: 0:11)
+  [dl]   Tinamou_Tinamus_685672.mp3  (quality: B, length: 0:13)
+  [dl]   Tinamou_Tinamus_673696.mp3  (quality: B, length: 0:09)
+  [dl]   Tinamou_Tinamus_639885.mp3  (quality: B, length: 0:19)
+  [dl]   Tinamou_Tinamus_608132.mp3  (quality: B, length: 0:33)
+  [dl]   Tinamou_Tinamus_576436.mp3  (quality: B, length: 0:45)
+  [dl]   Tinamou_Tinamus_557617.mp3  (quality: B, length: 0:11)
+  [dl]   Tinamou_Tinamus_556639.mp3  (quality: B, length: 0:10)
+  [dl]   Tinamou_Tinamus_547147.mp3  (quality: B, length: 0:30)
+  [dl]   Tinamou_Tinamus_539735.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_505769.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_456377.mp3  (quality: B, length: 0:17)
+  [dl]   Tinamou_Tinamus_453865.mp3  (quality: B, length: 0:28)
+  [dl]   Tinamou_Tinamus_449720.mp3  (quality: B, length: 0:09)
+  [dl]   Tinamou_Tinamus_441802.mp3  (quality: B, length: 0:21)
+  [dl]   Tinamou_Tinamus_441801.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_441799.mp3  (quality: B, length: 0:15)
+  [dl]   Tinamou_Tinamus_405722.mp3  (quality: B, length: 0:15)
+  [dl]   Tinamou_Tinamus_403323.mp3  (quality: B, length: 0:16)
+  [dl]   Tinamou_Tinamus_387444.mp3  (quality: B, length: 0:36)
+  [dl]   Tinamou_Tinamus_380710.mp3  (quality: B, length: 1:10)
+  [dl]   Tinamou_Tinamus_371531.mp3  (quality: B, length: 0:17)
+  [dl]   Tinamou_Tinamus_342395.mp3  (quality: B, length: 0:56)
+  [dl]   Tinamou_Tinamus_285207.mp3  (quality: B, length: 0:15)
+  [dl]   Tinamou_Tinamus_274416.mp3  (quality: B, length: 0:23)
+  [dl]   Tinamou_Tinamus_274330.mp3  (quality: B, length: 1:01)
+  [dl]   Tinamou_Tinamus_271824.mp3  (quality: B, length: 1:19)
+  [dl]   Tinamou_Tinamus_271633.mp3  (quality: B, length: 1:29)
+  [dl]   Tinamou_Tinamus_270978.mp3  (quality: B, length: 0:45)
+  [dl]   Tinamou_Tinamus_261510.mp3  (quality: B, length: 0:30)
+  [dl]   Tinamou_Tinamus_261509.mp3  (quality: B, length: 0:53)
+  [dl]   Tinamou_Tinamus_239089.mp3  (quality: B, length: 0:25)
+  [dl]   Tinamou_Tinamus_239088.mp3  (quality: B, length: 0:26)
+  [dl]   Tinamou_Tinamus_231243.mp3  (quality: B, length: 0:13)
+  [dl]   Tinamou_Tinamus_231242.mp3  (quality: B, length: 0:21)
+  [dl]   Tinamou_Tinamus_231241.mp3  (quality: B, length: 0:24)
+  [dl]   Tinamou_Tinamus_231240.mp3  (quality: B, length: 0:14)
+  [dl]   Tinamou_Tinamus_231239.mp3  (quality: B, length: 0:11)
+  [dl]   Tinamou_Tinamus_231238.mp3  (quality: B, length: 0:30)
+  [dl]   Tinamou_Tinamus_213072.mp3  (quality: B, length: 0:59)
+  [dl]   Tinamou_Tinamus_192238.mp3  (quality: B, length: 0:31)
+  [dl]   Tinamou_Tinamus_182258.mp3  (quality: B, length: 0:02)
+  [dl]   Tinamou_Tinamus_165994.mp3  (quality: B, length: 0:15)
+  [dl]   Tinamou_Tinamus_154191.mp3  (quality: B, length: 9:20)
+  [dl]   Tinamou_Tinamus_140621.mp3  (quality: B, length: 0:16)
+  [dl]   Tinamou_Tinamus_129845.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_117351.mp3  (quality: B, length: 0:20)
+  [dl]   Tinamou_Tinamus_92766.mp3  (quality: B, length: 0:10)
+  [dl]   Tinamou_Tinamus_64137.mp3  (quality: B, length: 0:33)
+  [dl]   Tinamou_Tinamus_58423.mp3  (quality: B, length: 0:04)
+  [dl]   Tinamou_Tinamus_44074.mp3  (quality: B, length: 0:23)
+  [dl]   Tinamou_Tinamus_44067.mp3  (quality: B, length: 0:33)
+  [dl]   Tinamou_Tinamus_29427.mp3  (quality: B, length: 0:37)
+  [dl]   Tinamou_Tinamus_28479.mp3  (quality: B, length: 0:19)
+  [dl]   Tinamou_Tinamus_15687.mp3  (quality: B, length: 0:28)
+  [dl]   Tinamou_Tinamus_1099.mp3  (quality: B, length: 0:09)
+  [dl]   Tinamou_Tinamus_94.mp3  (quality: B, length: 0:14)
+  [dl]   Tinamou_Tinamus_92.mp3  (quality: B, length: 0:19)
+  [dl]   Tinamou_Tinamus_1079796.mp3  (quality: C, length: 0:23)
+  [dl]   Tinamou_Tinamus_1054422.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_1033438.mp3  (quality: C, length: 3:20)
+  [dl]   Tinamou_Tinamus_973634.mp3  (quality: C, length: 0:55)
+  [dl]   Tinamou_Tinamus_973631.mp3  (quality: C, length: 2:04)
+  [dl]   Tinamou_Tinamus_972929.mp3  (quality: C, length: 0:44)
+  [dl]   Tinamou_Tinamus_965403.mp3  (quality: C, length: 4:08)
+  [dl]   Tinamou_Tinamus_965399.mp3  (quality: C, length: 3:23)
+  [dl]   Tinamou_Tinamus_920874.mp3  (quality: C, length: 0:03)
+  [dl]   Tinamou_Tinamus_920781.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_917456.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_917448.mp3  (quality: C, length: 0:04)
+  [dl]   Tinamou_Tinamus_768540.mp3  (quality: C, length: 0:15)
+  [dl]   Tinamou_Tinamus_648856.mp3  (quality: C, length: 0:31)
+  [dl]   Tinamou_Tinamus_564620.mp3  (quality: C, length: 4:29)
+  [dl]   Tinamou_Tinamus_506024.mp3  (quality: C, length: 0:09)
+  [dl]   Tinamou_Tinamus_490752.mp3  (quality: C, length: 0:09)
+  [dl]   Tinamou_Tinamus_456424.mp3  (quality: C, length: 0:37)
+  [dl]   Tinamou_Tinamus_387892.mp3  (quality: C, length: 0:05)
+  [dl]   Tinamou_Tinamus_303458.mp3  (quality: C, length: 0:06)
+  [dl]   Tinamou_Tinamus_284945.mp3  (quality: C, length: 0:06)
+  [dl]   Tinamou_Tinamus_261511.mp3  (quality: C, length: 0:56)
+  [dl]   Tinamou_Tinamus_256978.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_251637.mp3  (quality: C, length: 0:12)
+  [dl]   Tinamou_Tinamus_251636.mp3  (quality: C, length: 0:45)
+  [dl]   Tinamou_Tinamus_239090.mp3  (quality: C, length: 0:34)
+  [dl]   Tinamou_Tinamus_231248.mp3  (quality: C, length: 0:11)
+  [dl]   Tinamou_Tinamus_231247.mp3  (quality: C, length: 0:09)
+  [dl]   Tinamou_Tinamus_231246.mp3  (quality: C, length: 0:27)
+  [dl]   Tinamou_Tinamus_231245.mp3  (quality: C, length: 0:16)
+  [dl]   Tinamou_Tinamus_231244.mp3  (quality: C, length: 0:22)
+  [dl]   Tinamou_Tinamus_125693.mp3  (quality: C, length: 0:17)
+  [dl]   Tinamou_Tinamus_117969.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_117402.mp3  (quality: C, length: 0:15)
+  [dl]   Tinamou_Tinamus_117353.mp3  (quality: C, length: 0:18)
+  [dl]   Tinamou_Tinamus_93456.mp3  (quality: C, length: 0:11)
+  [dl]   Tinamou_Tinamus_93320.mp3  (quality: C, length: 0:07)
+  [dl]   Tinamou_Tinamus_75049.mp3  (quality: C, length: 0:12)
+  [dl]   Tinamou_Tinamus_75048.mp3  (quality: C, length: 1:01)
+  [dl]   Tinamou_Tinamus_72644.mp3  (quality: C, length: 0:15)
+  [dl]   Tinamou_Tinamus_65691.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_64136.mp3  (quality: C, length: 0:31)
+  [dl]   Tinamou_Tinamus_58422.mp3  (quality: C, length: 0:04)
+  [dl]   Tinamou_Tinamus_24203.mp3  (quality: C, length: 1:03)
+  [dl]   Tinamou_Tinamus_1045021.mp3  (quality: A, length: 1:00)
+  [dl]   Tinamou_Tinamus_1045020.mp3  (quality: A, length: 0:51)
+  [dl]   Tinamou_Tinamus_1009853.mp3  (quality: A, length: 1:34)
+  [dl]   Tinamou_Tinamus_965436.mp3  (quality: A, length: 3:40)
+  [dl]   Tinamou_Tinamus_965433.mp3  (quality: A, length: 4:03)
+  [dl]   Tinamou_Tinamus_621782.mp3  (quality: A, length: 0:17)
+  [dl]   Tinamou_Tinamus_395953.mp3  (quality: A, length: 0:22)
+  [dl]   Tinamou_Tinamus_1076679.mp3  (quality: B, length: 0:05)
+  [dl]   Tinamou_Tinamus_995521.mp3  (quality: B, length: 3:51)
+  [dl]   Tinamou_Tinamus_965428.mp3  (quality: B, length: 3:45)
+  [dl]   Tinamou_Tinamus_643008.mp3  (quality: B, length: 0:40)
+  [dl]   Tinamou_Tinamus_497452.mp3  (quality: B, length: 0:35)
+  [dl]   Tinamou_Tinamus_453694.mp3  (quality: B, length: 0:10)
+  [dl]   Tinamou_Tinamus_428089.mp3  (quality: B, length: 0:06)
+  [dl]   Tinamou_Tinamus_400646.mp3  (quality: B, length: 0:10)
+  [dl]   Tinamou_Tinamus_395757.mp3  (quality: B, length: 0:09)
+  [dl]   Tinamou_Tinamus_270977.mp3  (quality: B, length: 0:07)
+  [dl]   Tinamou_Tinamus_264358.mp3  (quality: B, length: 0:38)
+  [dl]   Tinamou_Tinamus_231228.mp3  (quality: B, length: 0:06)
+  [dl]   Tinamou_Tinamus_212996.mp3  (quality: B, length: 0:08)
+  [dl]   Tinamou_Tinamus_117970.mp3  (quality: B, length: 0:11)
+  [dl]   Tinamou_Tinamus_117391.mp3  (quality: B, length: 0:17)
+  [dl]   Tinamou_Tinamus_117390.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_117377.mp3  (quality: B, length: 0:17)
+  [dl]   Tinamou_Tinamus_117341.mp3  (quality: B, length: 0:12)
+  [dl]   Tinamou_Tinamus_85441.mp3  (quality: B, length: 0:16)
+  [dl]   Tinamou_Tinamus_66682.mp3  (quality: B, length: 0:09)
+  [dl]   Tinamou_Tinamus_38734.mp3  (quality: B, length: 0:07)
+  [dl]   Tinamou_Tinamus_3735.mp3  (quality: B, length: 0:14)
+  [dl]   Tinamou_Tinamus_482184.mp3  (quality: C, length: 1:03)
+  [dl]   Tinamou_Tinamus_482164.mp3  (quality: C, length: 0:43)
+  [dl]   Tinamou_Tinamus_482162.mp3  (quality: C, length: 0:10)
+  [dl]   Tinamou_Tinamus_482161.mp3  (quality: C, length: 0:08)
+  [dl]   Tinamou_Tinamus_239087.mp3  (quality: C, length: 0:33)
+  [dl]   Tinamou_Tinamus_231230.mp3  (quality: C, length: 0:08)
+  [dl]   Tinamou_Tinamus_231229.mp3  (quality: C, length: 0:11)
+  [dl]   Tinamou_Tinamus_212849.mp3  (quality: C, length: 0:15)
+  [dl]   Tinamou_Tinamus_195102.mp3  (quality: C, length: 0:14)
+  [dl]   Tinamou_Tinamus_119566.mp3  (quality: C, length: 1:20)
+  [dl]   Tinamou_Tinamus_118484.mp3  (quality: C, length: 0:58)
+  [dl]   Tinamou_Tinamus_117343.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_117342.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_117340.mp3  (quality: C, length: 0:13)
+  [dl]   Tinamou_Tinamus_117339.mp3  (quality: C, length: 0:47)
+  [dl]   Tinamou_Tinamus_94649.mp3  (quality: C, length: 0:14)
+  [dl]   Tinamou_Tinamus_84099.mp3  (quality: C, length: 0:09)
+  [dl]   Tinamou_Tinamus_13506.mp3  (quality: C, length: 0:09)
+
+==================================================
+Searching Xeno-Canto for: Tinamou_Crypturellus  (query: gen:Crypturellus q:">D")
+    Page 1/4 — 500 recordings
+    Page 2/4 — 500 recordings
+    Page 3/4 — 500 recordings
+    Page 4/4 — 350 recordings
+  → 1850 recordings found. Starting download...
+  [dl]   Tinamou_Crypturellus_871979.mp3  (quality: A, length: 0:11)
+  [dl]   Tinamou_Crypturellus_871978.mp3  (quality: A, length: 0:44)
+  [dl]   Tinamou_Crypturellus_832545.mp3  (quality: A, length: 0:52)
+  [dl]   Tinamou_Crypturellus_698536.mp3  (quality: A, length: 0:44)
+  [dl]   Tinamou_Crypturellus_698535.mp3  (quality: A, length: 1:41)
+  [dl]   Tinamou_Crypturellus_698534.mp3  (quality: A, length: 0:31)
+  [dl]   Tinamou_Crypturellus_698533.mp3  (quality: A, length: 0:17)
+  [dl]   Tinamou_Crypturellus_428699.mp3  (quality: A, length: 0:05)
+  [dl]   Tinamou_Crypturellus_261514.mp3  (quality: A, length: 0:16)
+  [dl]   Tinamou_Crypturellus_261513.mp3  (quality: A, length: 0:12)
+  [dl]   Tinamou_Crypturellus_261512.mp3  (quality: A, length: 0:28)
+  [dl]   Tinamou_Crypturellus_65407.mp3  (quality: A, length: 1:06)
+  [dl]   Tinamou_Crypturellus_22499.mp3  (quality: A, length: 0:29)
+  [dl]   Tinamou_Crypturellus_992046.mp3  (quality: B, length: 1:10)
+  [dl]   Tinamou_Crypturellus_477199.mp3  (quality: B, length: 0:35)
+  [dl]   Tinamou_Crypturellus_11871.mp3  (quality: B, length: 0:29)
+  [dl]   Tinamou_Crypturellus_238214.mp3  (quality: C, length: 0:07)
+  [dl]   Tinamou_Crypturellus_1079151.mp3  (quality: A, length: 1:27)
+  [dl]   Tinamou_Crypturellus_1069396.mp3  (quality: A, length: 0:38)
+  [dl]   Tinamou_Crypturellus_1050464.mp3  (quality: A, length: 0:41)
+  [dl]   Tinamou_Crypturellus_1044074.mp3  (quality: A, length: 0:27)
+  [dl]   Tinamou_Crypturellus_1044073.mp3  (quality: A, length: 0:50)
+  [dl]   Tinamou_Crypturellus_1044072.mp3  (quality: A, length: 0:49)
+  [dl]   Tinamou_Crypturellus_1035920.mp3  (quality: A, length: 1:44)
+  [dl]   Tinamou_Crypturellus_1035652.mp3  (quality: A, length: 0:40)
+  [dl]   Tinamou_Crypturellus_1011761.mp3  (quality: A, length: 1:14)
+  [dl]   Tinamou_Crypturellus_1009773.mp3  (quality: A, length: 0:40)
+  [dl]   Tinamou_Crypturellus_986717.mp3  (quality: A, length: 2:01)
+  [dl]   Tinamou_Crypturellus_986715.mp3  (quality: A, length: 3:22)
+  [dl]   Tinamou_Crypturellus_984820.mp3  (quality: A, length: 0:31)
+  [dl]   Tinamou_Crypturellus_984344.mp3  (quality: A, length: 0:43)
+  [dl]   Tinamou_Crypturellus_980748.mp3  (quality: A, length: 1:08)
+  [dl]   Tinamou_Crypturellus_979863.mp3  (quality: A, length: 2:08)
+  [dl]   Tinamou_Crypturellus_944387.mp3  (quality: A, length: 0:26)
+  [dl]   Tinamou_Crypturellus_944386.mp3  (quality: A, length: 0:21)
+  [dl]   Tinamou_Crypturellus_944044.mp3  (quality: A, length: 0:31)
+  [dl]   Tinamou_Crypturellus_939585.mp3  (quality: A, length: 1:05)
+  [dl]   Tinamou_Crypturellus_939484.mp3  (quality: A, length: 0:15)
+  [dl]   Tinamou_Crypturellus_862952.mp3  (quality: A, length: 2:33)
+  [dl]   Tinamou_Crypturellus_821609.mp3  (quality: A, length: 1:10)
+  [dl]   Tinamou_Crypturellus_801655.mp3  (quality: A, length: 2:18)
+  [dl]   Tinamou_Crypturellus_781297.mp3  (quality: A, length: 0:21)
+  [dl]   Tinamou_Crypturellus_769668.mp3  (quality: A, length: 0:47)
+  [dl]   Tinamou_Crypturellus_769477.mp3  (quality: A, length: 0:12)
+  [dl]   Tinamou_Crypturellus_755297.mp3  (quality: A, length: 0:07)
+  [dl]   Tinamou_Crypturellus_755087.mp3  (quality: A, length: 0:18)
+  [dl]   Tinamou_Crypturellus_748492.mp3  (quality: A, length: 1:04)
+  [dl]   Tinamou_Crypturellus_743526.mp3  (quality: A, length: 1:16)
+  [dl]   Tinamou_Crypturellus_698654.mp3  (quality: A, length: 0:13)
+  [dl]   Tinamou_Crypturellus_694205.mp3  (quality: A, length: 0:42)
+  [dl]   Tinamou_Crypturellus_687236.mp3  (quality: A, length: 0:38)
+  [dl]   Tinamou_Crypturellus_683512.mp3  (quality: A, length: 0:45)
+  [dl]   Tinamou_Crypturellus_676249.mp3  (quality: A, length: 1:22)
+  [dl]   Tinamou_Crypturellus_649047.mp3  (quality: A, length: 0:58)
+  [dl]   Tinamou_Crypturellus_642569.mp3  (quality: A, length: 0:50)
+  [dl]   Tinamou_Crypturellus_639880.mp3  (quality: A, length: 0:43)
+  [dl]   Tinamou_Crypturellus_616210.mp3  (quality: A, length: 0:23)
+  [dl]   Tinamou_Crypturellus_609167.mp3  (quality: A, length: 0:32)
+  [dl]   Tinamou_Crypturellus_574867.mp3  (quality: A, length: 0:22)
+  [dl]   Tinamou_Crypturellus_463658.mp3  (quality: A, length: 1:20)
+  [dl]   Tinamou_Crypturellus_456284.mp3  (quality: A, length: 0:39)
+  [dl]   Tinamou_Crypturellus_453540.mp3  (quality: A, length: 0:54)
+  [dl]   Tinamou_Crypturellus_452850.mp3  (quality: A, length: 0:53)
+  [dl]   Tinamou_Crypturellus_450786.mp3  (quality: A, length: 0:34)
+  [dl]   Tinamou_Crypturellus_446610.mp3  (quality: A, length: 0:32)
+  [dl]   Tinamou_Crypturellus_441107.mp3  (quality: A, length: 1:39)
+  [dl]   Tinamou_Crypturellus_424163.mp3  (quality: A, length: 0:36)
+  [dl]   Tinamou_Crypturellus_411906.mp3  (quality: A, length: 6:54)
+  [dl]   Tinamou_Crypturellus_401264.mp3  (quality: A, length: 0:38)
+  [dl]   Tinamou_Crypturellus_391377.mp3  (quality: A, length: 1:25)
+  [dl]   Tinamou_Crypturellus_387680.mp3  (quality: A, length: 0:56)
+  [dl]   Tinamou_Crypturellus_333417.mp3  (quality: A, length: 1:20)
+  [dl]   Tinamou_Crypturellus_333322.mp3  (quality: A, length: 0:51)
+  [dl]   Tinamou_Crypturellus_329091.mp3  (quality: A, length: 0:37)
+  [dl]   Tinamou_Crypturellus_329090.mp3  (quality: A, length: 0:32)
+  [dl]   Tinamou_Crypturellus_310825.mp3  (quality: A, length: 1:58)
+  [dl]   Tinamou_Crypturellus_310821.mp3  (quality: A, length: 0:36)
+  [dl]   Tinamou_Crypturellus_306288.mp3  (quality: A, length: 1:22)
+  [dl]   Tinamou_Crypturellus_297010.mp3  (quality: A, length: 0:29)
+  [dl]   Tinamou_Crypturellus_275912.mp3  (quality: A, length: 0:40)
+  [dl]   Tinamou_Crypturellus_272432.mp3  (quality: A, length: 0:34)
+  [dl]   Tinamou_Crypturellus_272431.mp3  (quality: A, length: 1:08)
+  [dl]   Tinamou_Crypturellus_257244.mp3  (quality: A, length: 0:48)
+  [dl]   Tinamou_Crypturellus_257243.mp3  (quality: A, length: 0:27)
+  [dl]   Tinamou_Crypturellus_257242.mp3  (quality: A, length: 0:28)
+  [dl]   Tinamou_Crypturellus_238216.mp3  (quality: A, length: 0:31)
+  [dl]   Tinamou_Crypturellus_238215.mp3  (quality: A, length: 0:51)
+  [dl]   Tinamou_Crypturellus_225380.mp3  (quality: A, length: 0:36)
+  [dl]   Tinamou_Crypturellus_221819.mp3  (quality: A, length: 0:24)
+  [dl]   Tinamou_Crypturellus_221818.mp3  (quality: A, length: 0:35)
+  [dl]   Tinamou_Crypturellus_221817.mp3  (quality: A, length: 0:49)
+  [dl]   Tinamou_Crypturellus_221816.mp3  (quality: A, length: 0:51)
+  [dl]   Tinamou_Crypturellus_217694.mp3  (quality: A, length: 0:32)
+  [dl]   Tinamou_Crypturellus_199263.mp3  (quality: A, length: 3:30)
+  [dl]   Tinamou_Crypturellus_171227.mp3  (quality: A, length: 1:51)
+  [dl]   Tinamou_Crypturellus_167252.mp3  (quality: A, length: 0:38)
+  [dl]   Tinamou_Crypturellus_155416.mp3  (quality: A, length: 1:52)
+  [dl]   Tinamou_Crypturellus_143922.mp3  (quality: A, length: 1:31)
+  [dl]   Tinamou_Crypturellus_129346.mp3  (quality: A, length: 0:23)
+  [dl]   Tinamou_Crypturellus_127833.mp3  (quality: A, length: 0:31)
+  [dl]   Tinamou_Crypturellus_127229.mp3  (quality: A, length: 1:49)
+  [dl]   Tinamou_Crypturellus_127228.mp3  (quality: A, length: 1:40)
+  [dl]   Tinamou_Crypturellus_122487.mp3  (quality: A, length: 0:47)
+  [dl]   Tinamou_Crypturellus_117975.mp3  (quality: A, length: 0:48)
+  [dl]   Tinamou_Crypturellus_117974.mp3  (quality: A, length: 2:38)
+  [dl]   Tinamou_Crypturellus_117940.mp3  (quality: A, length: 1:59)
+  [dl]   Tinamou_Crypturellus_117938.mp3  (quality: A, length: 1:06)
+  [dl]   Tinamou_Crypturellus_117441.mp3  (quality: A, length: 1:54)
+  [dl]   Tinamou_Crypturellus_117440.mp3  (quality: A, length: 3:14)
+  [dl]   Tinamou_Crypturellus_117400.mp3  (quality: A, length: 4:03)
+  [dl]   Tinamou_Crypturellus_117399.mp3  (quality: A, length: 6:41)
+  [dl]   Tinamou_Crypturellus_117398.mp3  (quality: A, length: 1:58)
+  [dl]   Tinamou_Crypturellus_117397.mp3  (quality: A, length: 1:41)
+  [dl]   Tinamou_Crypturellus_117376.mp3  (quality: A, length: 3:32)
+  [dl]   Tinamou_Crypturellus_117375.mp3  (quality: A, length: 2:13)
+  [dl]   Tinamou_Crypturellus_117374.mp3  (quality: A, length: 2:11)
+  [dl]   Tinamou_Crypturellus_117361.mp3  (quality: A, length: 1:15)
+  [dl]   Tinamou_Crypturellus_117360.mp3  (quality: A, length: 0:32)
+  [dl]   Tinamou_Crypturellus_117359.mp3  (quality: A, length: 1:24)
+  [dl]   Tinamou_Crypturellus_117358.mp3  (quality: A, length: 0:43)
+  [dl]   Tinamou_Crypturellus_117357.mp3  (quality: A, length: 0:48)
+  [dl]   Tinamou_Crypturellus_102709.mp3  (quality: A, length: 1:29)
+  [dl]   Tinamou_Crypturellus_102708.mp3  (quality: A, length: 0:30)
+  [dl]   Tinamou_Crypturellus_85038.mp3  (quality: A, length: 0:23)
+  [dl]   Tinamou_Crypturellus_85037.mp3  (quality: A, length: 0:32)
+  [dl]   Tinamou_Crypturellus_85036.mp3  (quality: A, length: 0:48)
+  [dl]   Tinamou_Crypturellus_85035.mp3  (quality: A, length: 0:27)
+  [dl]   Tinamou_Crypturellus_85034.mp3  (quality: A, length: 0:37)
+  [dl]   Tinamou_Crypturellus_68054.mp3  (quality: A, length: 0:59)
+  [dl]   Tinamou_Crypturellus_63326.mp3  (quality: A, length: 0:46)
+  [dl]   Tinamou_Crypturellus_63324.mp3  (quality: A, length: 0:15)
+  [dl]   Tinamou_Crypturellus_61372.mp3  (quality: A, length: 0:05)
+  [dl]   Tinamou_Crypturellus_61371.mp3  (quality: A, length: 0:30)
+  [dl]   Tinamou_Crypturellus_58421.mp3  (quality: A, length: 1:36)
+  [dl]   Tinamou_Crypturellus_55535.mp3  (quality: A, length: 1:25)
+  [dl]   Tinamou_Crypturellus_54929.mp3  (quality: A, length: 2:43)
+  [dl]   Tinamou_Crypturellus_54924.mp3  (quality: A, length: 1:21)
+  [dl]   Tinamou_Crypturellus_47907.mp3  (quality: A, length: 0:56)
+  [dl]   Tinamou_Crypturellus_35361.mp3  (quality: A, length: 0:52)
+  [dl]   Tinamou_Crypturellus_33200.mp3  (quality: A, length: 0:49)
+  [dl]   Tinamou_Crypturellus_29550.mp3  (quality: A, length: 0:09)
+  [dl]   Tinamou_Crypturellus_27770.mp3  (quality: A, length: 2:39)
+  [dl]   Tinamou_Crypturellus_23785.mp3  (quality: A, length: 2:25)
+  [dl]   Tinamou_Crypturellus_9904.mp3  (quality: A, length: 0:59)
+  [dl]   Tinamou_Crypturellus_4928.mp3  (quality: A, length: 0:25)
+  [dl]   Tinamou_Crypturellus_1071354.mp3  (quality: B, length: 0:32)
+  [dl]   Tinamou_Crypturellus_987210.mp3  (quality: B, length: 6:08)
+  [dl]   Tinamou_Crypturellus_986564.mp3  (quality: B, length: 2:04)
+  [dl]   Tinamou_Crypturellus_909281.mp3  (quality: B, length: 0:47)
+  [dl]   Tinamou_Crypturellus_909278.mp3  (quality: B, length: 0:16)
+  [dl]   Tinamou_Crypturellus_881545.mp3  (quality: B, length: 1:24)
+  [dl]   Tinamou_Crypturellus_872350.mp3  (quality: B, length: 0:04)

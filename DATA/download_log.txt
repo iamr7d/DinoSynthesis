@@ -1,0 +1,180 @@
+Initializing Dino-VAE Data Pipeline (Expanded Download)...
+
+==================================================
+Searching Xeno-Canto for: Cassowary  (query: gen:Casuarius q:">C")
+    Page 1/1 — 21 recordings
+  → 21 recordings found. Starting download...
+  [dl]   Cassowary_126083.mp3  (quality: A, length: 0:54)
+  [dl]   Cassowary_1066434.mp3  (quality: B, length: 0:10)
+  [dl]   Cassowary_1066433.mp3  (quality: B, length: 2:01)
+  [dl]   Cassowary_1066432.mp3  (quality: B, length: 0:09)
+  [dl]   Cassowary_404787.mp3  (quality: B, length: 0:12)
+  [dl]   Cassowary_316215.mp3  (quality: B, length: 2:04)
+  [dl]   Cassowary_316214.mp3  (quality: B, length: 1:52)
+  [dl]   Cassowary_276905.mp3  (quality: B, length: 0:21)
+  [dl]   Cassowary_158488.mp3  (quality: B, length: 0:20)
+  [dl]   Cassowary_143429.mp3  (quality: B, length: 0:23)
+  [dl]   Cassowary_140150.mp3  (quality: B, length: 0:15)
+  [dl]   Cassowary_132934.mp3  (quality: B, length: 0:17)
+  [dl]   Cassowary_125292.mp3  (quality: B, length: 0:31)
+  [dl]   Cassowary_125291.mp3  (quality: B, length: 1:54)
+  [dl]   Cassowary_120893.mp3  (quality: B, length: 1:08)
+  [dl]   Cassowary_524398.mp3  (quality: B, length: 0:09)
+  [dl]   Cassowary_498017.mp3  (quality: A, length: 0:30)
+  [dl]   Cassowary_498016.mp3  (quality: A, length: 0:28)
+  [dl]   Cassowary_558583.mp3  (quality: B, length: 0:10)
+  [dl]   Cassowary_498015.mp3  (quality: B, length: 0:21)
+  [dl]   Cassowary_209609.mp3  (quality: B, length: 0:07)
+
+==================================================
+Searching Xeno-Canto for: Emu  (query: gen:Dromaius q:">C")
+    Page 1/1 — 14 recordings
+  → 14 recordings found. Starting download...
+  [dl]   Emu_825159.mp3  (quality: A, length: 0:46)
+  [dl]   Emu_597154.mp3  (quality: A, length: 0:37)
+  [dl]   Emu_287026.mp3  (quality: A, length: 0:28)
+  [dl]   Emu_233818.mp3  (quality: A, length: 0:27)
+  [dl]   Emu_195089.mp3  (quality: A, length: 0:29)
+  [dl]   Emu_132935.mp3  (quality: A, length: 0:10)
+  [dl]   Emu_881663.mp3  (quality: B, length: 3:18)
+  [dl]   Emu_681004.mp3  (quality: B, length: 1:20)
+  [dl]   Emu_597155.mp3  (quality: B, length: 0:47)
+  [dl]   Emu_577709.mp3  (quality: B, length: 0:12)
+  [dl]   Emu_575654.mp3  (quality: B, length: 1:08)
+  [dl]   Emu_343777.mp3  (quality: B, length: 0:03)
+  [dl]   Emu_171789.mp3  (quality: B, length: 0:09)
+  [dl]   Emu_113130.mp3  (quality: B, length: 0:18)
+
+==================================================
+Searching Xeno-Canto for: Ostrich  (query: gen:Struthio q:">C")
+    Page 1/1 — 42 recordings
+  → 42 recordings found. Starting download...
+  [dl]   Ostrich_1080577.mp3  (quality: A, length: 0:42)
+  [dl]   Ostrich_1080575.mp3  (quality: A, length: 0:40)
+  [dl]   Ostrich_1080574.mp3  (quality: A, length: 0:38)
+  [dl]   Ostrich_845947.mp3  (quality: A, length: 0:00)
+  [dl]   Ostrich_845946.mp3  (quality: A, length: 0:00)
+  [dl]   Ostrich_845945.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_845942.mp3  (quality: A, length: 0:04)
+  [dl]   Ostrich_845940.mp3  (quality: A, length: 0:04)
+  [dl]   Ostrich_845936.mp3  (quality: A, length: 0:00)
+  [dl]   Ostrich_845935.mp3  (quality: A, length: 0:00)
+  [dl]   Ostrich_845933.mp3  (quality: A, length: 0:02)
+  [dl]   Ostrich_845931.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_845930.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_845929.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_845928.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_845927.mp3  (quality: A, length: 0:02)
+  [dl]   Ostrich_845925.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_845920.mp3  (quality: A, length: 0:01)
+  [dl]   Ostrich_834116.mp3  (quality: A, length: 0:41)
+  [dl]   Ostrich_834114.mp3  (quality: A, length: 0:45)
+  [dl]   Ostrich_516153.mp3  (quality: A, length: 0:53)
+  [dl]   Ostrich_46725.mp3  (quality: A, length: 0:11)
+  [dl]   Ostrich_1080576.mp3  (quality: B, length: 0:40)
+  [dl]   Ostrich_1080573.mp3  (quality: B, length: 0:42)
+  [dl]   Ostrich_1059946.mp3  (quality: B, length: 0:18)
+  [dl]   Ostrich_845956.mp3  (quality: B, length: 0:02)
+  [dl]   Ostrich_845955.mp3  (quality: B, length: 0:01)
+  [dl]   Ostrich_845954.mp3  (quality: B, length: 0:01)
+  [dl]   Ostrich_845953.mp3  (quality: B, length: 0:00)
+  [dl]   Ostrich_845949.mp3  (quality: B, length: 0:00)
+  [dl]   Ostrich_845948.mp3  (quality: B, length: 0:00)
+  [dl]   Ostrich_845944.mp3  (quality: B, length: 0:04)
+  [dl]   Ostrich_845943.mp3  (quality: B, length: 0:04)
+  [dl]   Ostrich_845941.mp3  (quality: B, length: 0:04)
+  [dl]   Ostrich_845939.mp3  (quality: B, length: 0:04)
+  [dl]   Ostrich_845938.mp3  (quality: B, length: 0:04)
+  [dl]   Ostrich_845937.mp3  (quality: B, length: 0:00)
+  [dl]   Ostrich_845934.mp3  (quality: B, length: 0:03)
+  [dl]   Ostrich_845932.mp3  (quality: B, length: 0:00)
+  [dl]   Ostrich_834115.mp3  (quality: B, length: 0:40)
+  [dl]   Ostrich_208209.mp3  (quality: B, length: 0:26)
+  [dl]   Ostrich_292043.mp3  (quality: B, length: 0:11)
+
+==================================================
+Searching Xeno-Canto for: Rhea  (query: gen:Rhea q:">C")
+    Page 1/1 — 18 recordings
+  → 18 recordings found. Starting download...
+  [dl]   Rhea_1016004.mp3  (quality: A, length: 1:16)
+  [dl]   Rhea_201498.mp3  (quality: A, length: 0:28)
+  [dl]   Rhea_191451.mp3  (quality: A, length: 1:26)
+  [dl]   Rhea_51833.mp3  (quality: A, length: 0:04)
+  [dl]   Rhea_49632.mp3  (quality: A, length: 0:41)
+  [dl]   Rhea_45555.mp3  (quality: A, length: 0:35)
+  [dl]   Rhea_1016005.mp3  (quality: B, length: 1:52)
+  [dl]   Rhea_993748.mp3  (quality: B, length: 0:01)
+  [dl]   Rhea_229054.mp3  (quality: B, length: 0:07)
+  [dl]   Rhea_191450.mp3  (quality: B, length: 0:06)
+  [dl]   Rhea_127145.mp3  (quality: B, length: 0:03)
+  [dl]   Rhea_54184.mp3  (quality: B, length: 0:02)
+  [dl]   Rhea_51832.mp3  (quality: B, length: 0:19)
+  [dl]   Rhea_37806.mp3  (quality: B, length: 0:03)
+  [dl]   Rhea_304506.mp3  (quality: A, length: 0:22)
+  [dl]   Rhea_939456.mp3  (quality: B, length: 0:13)
+  [dl]   Rhea_90569.mp3  (quality: B, length: 0:24)
+  [dl]   Rhea_89244.mp3  (quality: B, length: 0:05)
+
+==================================================
+Searching Xeno-Canto for: Shoebill  (query: gen:Balaeniceps q:">C")
+    Page 1/1 — 0 recordings
+  → 0 recordings found. Starting download...
+  No recordings found. Skipping.
+
+==================================================
+Searching Xeno-Canto for: Kiwi  (query: gen:Apteryx q:">C")
+    Page 1/1 — 31 recordings
+  → 31 recordings found. Starting download...
+  [dl]   Kiwi_525925.mp3  (quality: A, length: 0:25)
+  [dl]   Kiwi_955810.mp3  (quality: A, length: 0:50)
+  [dl]   Kiwi_794785.mp3  (quality: A, length: 0:26)
+  [dl]   Kiwi_668545.mp3  (quality: A, length: 0:35)
+  [dl]   Kiwi_526191.mp3  (quality: A, length: 0:20)
+  [dl]   Kiwi_526190.mp3  (quality: A, length: 0:14)
+  [dl]   Kiwi_526189.mp3  (quality: A, length: 0:30)
+  [dl]   Kiwi_521536.mp3  (quality: A, length: 0:35)
+  [dl]   Kiwi_794786.mp3  (quality: B, length: 0:25)
+  [dl]   Kiwi_638202.mp3  (quality: B, length: 0:16)
+  [dl]   Kiwi_638200.mp3  (quality: B, length: 0:22)
+  [dl]   Kiwi_526192.mp3  (quality: B, length: 0:10)
+  [dl]   Kiwi_526188.mp3  (quality: B, length: 0:20)
+  [dl]   Kiwi_526186.mp3  (quality: B, length: 0:09)
+  [dl]   Kiwi_526185.mp3  (quality: B, length: 0:18)
+  [dl]   Kiwi_526184.mp3  (quality: B, length: 0:37)
+  [dl]   Kiwi_521538.mp3  (quality: B, length: 1:02)
+  [dl]   Kiwi_521537.mp3  (quality: B, length: 0:52)
+  [dl]   Kiwi_521535.mp3  (quality: B, length: 0:32)
+  [dl]   Kiwi_348749.mp3  (quality: B, length: 0:20)
+  [dl]   Kiwi_356323.mp3  (quality: A, length: 0:19)
+  [dl]   Kiwi_356322.mp3  (quality: A, length: 0:23)
+  [dl]   Kiwi_356321.mp3  (quality: A, length: 0:17)
+  [dl]   Kiwi_311777.mp3  (quality: A, length: 0:13)
+  [dl]   Kiwi_958221.mp3  (quality: A, length: 0:23)
+  [dl]   Kiwi_152944.mp3  (quality: A, length: 0:25)
+  [dl]   Kiwi_33754.mp3  (quality: A, length: 0:26)
+  [dl]   Kiwi_952952.mp3  (quality: B, length: 0:23)
+  [dl]   Kiwi_182608.mp3  (quality: B, length: 0:16)
+  [dl]   Kiwi_88143.mp3  (quality: B, length: 0:51)
+  [dl]   Kiwi_666024.mp3  (quality: A, length: 0:44)
+
+==================================================
+Searching Xeno-Canto for: Alligator  (query: gen:Alligator q:">C")
+    Page 1/1 — 0 recordings
+  → 0 recordings found. Starting download...
+  No recordings found. Skipping.
+
+==================================================
+Searching Xeno-Canto for: Crocodylus  (query: gen:Crocodylus q:">C")
+    Page 1/1 — 0 recordings
+  → 0 recordings found. Starting download...
+  No recordings found. Skipping.
+
+
+All downloads complete!
+
+Dataset summary:
+  Cassowary      : 21 files
+  Emu            : 14 files
+  Ostrich        : 42 files
+  Rhea           : 18 files
+  Kiwi           : 31 files

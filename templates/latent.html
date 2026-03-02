@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<title>3D Latent Universe — DinoSynthesis</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #05070a;
+  --surface: #0d0f14;
+  --surface2:#0f1217;
+  --border:  #1d2130;
+  --accent:  #e05c2a;
+  --accent2: #ff8c42;
+  --muted:   #545a6a;
+  --text:    #d8dbe8;
+  --text2:   #858ca0;
+  --bird:    #00e5ff;
+  --croc:    #ff3366;
+  --mass:    #cc44ff;
+  --star:    #ffd54f;
+  --green:   #3ecf74;
+  --radius:  8px;
+}
+html, body { height: 100%; background: var(--bg); color: var(--text);
+             font-family: -apple-system, 'Segoe UI', sans-serif; font-size: 13px; overflow: hidden; }
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 50px;
+  background: rgba(5,7,10,.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+}
+.nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--text);
+            text-decoration: none; text-transform: uppercase; }
+.nav-links { display: flex; gap: 6px; }
+.nav-btn { font-size: 11px; padding: 5px 12px; border-radius: 5px; cursor: pointer;
+           text-decoration: none; transition: all .12s; border: 1px solid var(--border);
+           color: var(--text2); background: transparent; }
+.nav-btn:hover { border-color: var(--accent2); color: var(--text); }
+.nav-btn.active { background: var(--surface2); color: var(--text); border-color: var(--muted); }
+
+.layout {
+  position: fixed;
+  top: 50px; left: 0; right: 0; bottom: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
+  height: 100%;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+#canvas-wrap {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+#threeCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: grab;
+  outline: none;
+  display: block;
+}
+#threeCanvas:active { cursor: grabbing; }
+.panel { border-bottom: 1px solid var(--border); padding: 14px 16px; }
+.panel-head { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--text2);
+              text-transform: uppercase; margin-bottom: 10px; }
+
+.legend-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 12px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dot-bird { background: var(--bird); box-shadow: 0 0 6px var(--bird); }
+.dot-croc { background: var(--croc); box-shadow: 0 0 6px var(--croc); }
+.dot-mass { background: var(--mass); box-shadow: 0 0 6px var(--mass); }
+.dot-star { background: var(--star); box-shadow: 0 0 8px var(--star); }
+
+.blend-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.blend-label { width: 56px; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.blend-label.bird { color: var(--bird); }
+.blend-label.croc { color: var(--croc); }
+.blend-label.mass { color: var(--mass); }
+.blend-slider { flex: 1; accent-color: var(--accent2); cursor: pointer; }
+.blend-val { width: 34px; text-align: right; font-size: 11px; color: var(--text2); font-variant-numeric: tabular-nums; }
+
+.q-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+.q-label { width: 100px; font-size: 10px; color: var(--text2); flex-shrink: 0; }
+.q-slider { flex: 1; accent-color: var(--muted); cursor: pointer; }
+.q-val { width: 30px; text-align: right; font-size: 10px; color: var(--text2); font-variant-numeric: tabular-nums; }
+
+#blendSynthBtn {
+  width: 100%; padding: 9px; background: var(--accent); border: none; border-radius: 6px;
+  color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 1px; cursor: pointer;
+  text-transform: uppercase; transition: background .15s; margin-top: 10px;
+}
+#blendSynthBtn:hover { background: var(--accent2); }
+#blendSynthBtn:disabled { background: var(--muted); cursor: default; }
+
+#hitInfo { font-size: 11px; color: var(--text2); line-height: 1.7; min-height: 36px; }
+#hitInfo strong { color: var(--text); }
+
+#specImg { width: 100%; border-radius: 5px; border: 1px solid var(--border); display: block; }
+#specPlaceholder { display: flex; align-items: center; justify-content: center;
+  height: 70px; font-size: 11px; color: var(--muted); background: var(--surface2);
+  border-radius: 5px; border: 1px solid var(--border); }
+
+#audioPlayer {
+  width: 100%; margin-top: 8px; height: 32px; accent-color: var(--accent2);
+  filter: invert(1) hue-rotate(170deg) brightness(0.85);
+}
+#synthStatus { font-size: 11px; color: var(--text2); margin-top: 6px; min-height: 16px; }
+
+/* Image generation panel */
+#imgGenPanel { border-bottom: 1px solid var(--border); padding: 14px 16px; }
+#animalImgWrap { position: relative; border-radius: 7px; overflow: hidden;
+  background: var(--surface2); border: 1px solid var(--border); min-height: 80px;
+  display: flex; align-items: center; justify-content: center; }
+#animalImg { width: 100%; display: none; border-radius: 7px; }
+#imgPlaceholder { font-size: 11px; color: var(--muted); padding: 18px 0; }
+#imgSpinner { display: none; position: absolute; inset: 0; background: rgba(5,7,10,.7);
+  align-items: center; justify-content: center; font-size: 11px; color: var(--text2); }
+#imgPromptInfo { font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.5;
+  max-height: 42px; overflow: hidden; }
+
+.var-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.var-label { font-size: 10px; color: var(--text2); width: 34px; }
+.var-bar-bg { flex: 1; height: 5px; background: var(--border); border-radius: 3px; }
+.var-bar-fill { height: 5px; border-radius: 3px; background: var(--accent2); }
+.var-pct { font-size: 10px; color: var(--text2); width: 32px; text-align: right; font-variant-numeric: tabular-nums; }
+
+#tooltip {
+  position: fixed; pointer-events: none; z-index: 200;
+  background: rgba(13,15,20,.95); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 10px; font-size: 11px;
+  color: var(--text); white-space: nowrap; display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.5);
+}
+#tooltip .tt-group { font-weight: 700; }
+#tooltip .tt-cls   { color: var(--text2); margin-top: 2px; }
+
+.toggle-row { display: flex; align-items: center; justify-content: space-between; margin: 6px 0; font-size: 11px; color: var(--text2); }
+.toggle { position: relative; display: inline-block; width: 32px; height: 17px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--border); border-radius: 17px; transition: .2s; }
+.toggle-slider::before { content: ""; position: absolute; height: 11px; width: 11px; left: 3px; bottom: 3px; background: var(--text2); border-radius: 50%; transition: .2s; }
+input:checked + .toggle-slider { background: var(--accent); }
+input:checked + .toggle-slider::before { transform: translateX(15px); background: #fff; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">&#9670; DinoSynthesis</a>
+  <div class="nav-links">
+    <a class="nav-btn" href="/">Home</a>
+    <a class="nav-btn active" href="/latent">Latent Space</a>
+    <a class="nav-btn" href="/synth">Synthesizer</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <div class="sidebar">
+
+    <div class="panel">
+      <div class="panel-head">Legend</div>
+      <div class="legend-row"><span class="dot dot-bird"></span><span>Bird</span></div>
+      <div class="legend-row"><span class="dot dot-croc"></span><span>Reptile</span></div>
+      <div class="legend-row"><span class="dot dot-mass"></span><span>Mass Extinction</span></div>
+      <div class="legend-row"><span class="dot dot-star"></span><span>Synthesis point</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">&#9733; Blend Synthesizer</div>
+      <div class="blend-row">
+        <span class="blend-label bird">Bird</span>
+        <input type="range" class="blend-slider" id="blendBird" min="0" max="100" value="33" oninput="updateBlend()">
+        <span class="blend-val" id="blendBirdVal">33</span>
+      </div>
+      <div class="blend-row">
+        <span class="blend-label croc">Reptile</span>
+        <input type="range" class="blend-slider" id="blendCroc" min="0" max="100" value="33" oninput="updateBlend()">
+        <span class="blend-val" id="blendCrocVal">33</span>
+      </div>
+      <div class="blend-row">
+        <span class="blend-label mass">Mass</span>
+        <input type="range" class="blend-slider" id="blendMass" min="0" max="100" value="34" oninput="updateBlend()">
+        <span class="blend-val" id="blendMassVal">34</span>
+      </div>
+      <button id="blendSynthBtn" onclick="synthesizeBlend()">&#9654; Synthesize Blend</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">Audio Quality</div>
+      <div class="q-row">
+        <span class="q-label">Sharpness</span>
+        <input type="range" class="q-slider" id="qSharp" min="0" max="30" value="18" oninput="updateQ()">
+        <span class="q-val" id="qSharpV">1.8</span>
+      </div>
+      <div class="q-row">
+        <span class="q-label">Spectral Gate</span>
+        <input type="range" class="q-slider" id="qGate" min="0" max="30" value="15" oninput="updateQ()">
+        <span class="q-val" id="qGateV">0.15</span>
+      </div>
+      <div class="q-row">
+        <span class="q-label">Pre-emphasis</span>
+        <input type="range" class="q-slider" id="qPreemph" min="80" max="100" value="97" oninput="updateQ()">
+        <span class="q-val" id="qPreemphV">0.97</span>
+      </div>
+      <div class="q-row">
+        <span class="q-label">Sobel</span>
+        <input type="range" class="q-slider" id="qSobel" min="0" max="20" value="4" oninput="updateQ()">
+        <span class="q-val" id="qSobelV">0.4</span>
+      </div>
+      <div class="q-row">
+        <span class="q-label">Temporal Smooth</span>
+        <input type="range" class="q-slider" id="qTsmooth" min="0" max="30" value="10" oninput="updateQ()">
+        <span class="q-val" id="qTsmoothV">1.0</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">View</div>
+      <div class="toggle-row">
+        <span>Show axes</span>
+        <label class="toggle"><input type="checkbox" id="toggleAxes" checked onchange="toggleAxesVis()"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <span>Centroid lines</span>
+        <label class="toggle"><input type="checkbox" id="toggleLines" checked onchange="toggleLinesVis()"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <span>Auto-rotate</span>
+        <label class="toggle"><input type="checkbox" id="toggleAutoRotate" onchange="toggleAutoRot()"><span class="toggle-slider"></span></label>
+      </div>
+    </div>
+
+    <div class="panel" id="variancePanel" style="display:none">
+      <div class="panel-head">PCA Variance</div>
+      <div class="var-row"><span class="var-label">PC 1</span><div class="var-bar-bg"><div class="var-bar-fill" id="varBar1" style="width:0%"></div></div><span class="var-pct" id="varPct1">—</span></div>
+      <div class="var-row"><span class="var-label">PC 2</span><div class="var-bar-bg"><div class="var-bar-fill" id="varBar2" style="width:0%"></div></div><span class="var-pct" id="varPct2">—</span></div>
+      <div class="var-row"><span class="var-label">PC 3</span><div class="var-bar-bg"><div class="var-bar-fill" id="varBar3" style="width:0%"></div></div><span class="var-pct" id="varPct3">—</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">&#9670; Output</div>
+      <div id="hitInfo">Click any point in 3D space — or use the Blend Synthesizer — to generate audio.</div>
+      <div style="margin-top:10px">
+        <div id="specPlaceholder">spectrogram appears here</div>
+        <img id="specImg" style="display:none" alt="spectrogram">
+      </div>
+      <audio id="audioPlayer" controls style="display:none"></audio>
+      <div id="synthStatus"></div>
+    </div>
+
+    <div id="imgGenPanel">
+      <div class="panel-head">&#127775; AI Animal Vision <span style="color:var(--muted);font-weight:400;letter-spacing:0">(Flux)</span></div>
+      <div id="animalImgWrap">
+        <span id="imgPlaceholder">portrait appears after synthesis</span>
+        <img id="animalImg" alt="AI animal portrait">
+        <div id="imgSpinner">&#9889; generating…</div>
+      </div>
+      <div id="imgPromptInfo"></div>
+    </div>
+
+  </div>
+  <div id="canvas-wrap"><canvas id="threeCanvas"></canvas></div>
+</div>
+
+<div id="tooltip">
+  <div class="tt-group" id="ttGroup"></div>
+  <div class="tt-cls"   id="ttCls"></div>
+</div>
+
+<script src="/static/js/three.min.js"></script>
+<script src="/static/js/OrbitControls.js"></script>
+<script>
+// THREE.js loaded synchronously from local static files
+
+function showError(msg) {
+  const cv = document.getElementById('threeCanvas');
+  const ctx = cv.getContext('2d');
+  cv.width  = cv.clientWidth;
+  cv.height = cv.clientHeight;
+  ctx.fillStyle = '#05070a';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#ff6655';
+  ctx.font = '16px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(msg, cv.width/2, cv.height/2);
+}
+
+const GROUP_COLORS = { Bird: 0x00e5ff, Reptile: 0xff3366, Mass: 0xcc44ff };
+const GROUP_CSS    = { Bird: '#00e5ff', Reptile: '#ff3366', Mass: '#cc44ff' };
+const POINT_R = 0.06, STAR_R = 0.20;
+
+let points3d=[], centroids={};
+let scene, camera, renderer, controls;
+let pointMeshes=[], centroidMarkers=[], starMesh, centroidLines, axesHelper;
+let raycaster, mouse;
+let hoveredMesh=null;
+
+function initThree() {
+  try {
+    const cv = document.getElementById('threeCanvas');
+    const wrap = document.getElementById('canvas-wrap');
+    const W = wrap.offsetWidth, H = wrap.offsetHeight;
+    scene  = new THREE.Scene();
+    scene.background = new THREE.Color(0x05070a);
+    scene.fog        = new THREE.FogExp2(0x05070a, 0.018);
+    camera = new THREE.PerspectiveCamera(50, W/H, 0.05, 500);
+    camera.position.set(10, 6, 14);
+    renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(W, H, false); // false = don't override CSS size (let flex layout control it)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const dl = new THREE.DirectionalLight(0xffffff, 1.0);
+    dl.position.set(15, 25, 15); scene.add(dl);
+    controls = new THREE.OrbitControls(camera, cv);
+    controls.enableDamping = true; controls.dampingFactor = 0.06;
+    controls.minDistance = 1; controls.maxDistance = 80;
+    axesHelper = new THREE.AxesHelper(6); scene.add(axesHelper);
+    raycaster = new THREE.Raycaster();
+    raycaster.params.Mesh = { threshold: 0.05 };
+    mouse = new THREE.Vector2(-999,-999);
+    cv.addEventListener('mousemove', onMM);
+    cv.addEventListener('click', onClick);
+    window.addEventListener('resize', onResize);
+    console.log('✓ Three.js initialized');
+    (function loop(){ requestAnimationFrame(loop); try { controls.update(); } catch(e) {} renderer.render(scene,camera); })();
+  } catch (e) {
+    console.error('Failed to init Three.js:', e);
+    showError('3D initialization failed: ' + (e.message || 'Unknown error'));
+  }
+}
+
+function onResize() {
+  if (!renderer) return;
+  const wrap = document.getElementById('canvas-wrap');
+  const W = wrap.offsetWidth, H = wrap.offsetHeight;
+  if (!W || !H) return;
+  camera.aspect = W/H; camera.updateProjectionMatrix();
+  renderer.setSize(W, H, false);
+}
+new ResizeObserver(onResize).observe(document.getElementById('canvas-wrap') || document.body);
+
+async function loadData() {
+  try {
+    const res  = await fetch('/api/latent-data');
+    const data = await res.json();
+    if(data.error){ console.error(data.error); return; }
+    points3d  = data.points;
+    centroids = data.centroids;
+    buildPoints(); buildCentroidObjects(); buildStar();
+    if(data.variance && data.variance.length>=3){
+      document.getElementById('variancePanel').style.display='';
+      [1,2,3].forEach((n,i)=>{
+        const p=(data.variance[i]*100).toFixed(1)+'%';
+        document.getElementById('varBar'+n).style.width=p;
+        document.getElementById('varPct'+n).textContent=p;
+      });
+    }
+    console.log('✓ Latent data loaded:', data.points.length, 'points');
+  } catch(e) {
+    console.error('Failed to load latent data:', e);
+  }
+}
+
+function buildPoints(){
+  const geom = new THREE.SphereGeometry(POINT_R,6,6);
+  const mats = {};
+  for(const[g,hex] of Object.entries(GROUP_COLORS)){
+    mats[g] = new THREE.MeshStandardMaterial({color:hex,emissive:hex,emissiveIntensity:0.3,roughness:0.5});
+  }
+  points3d.forEach((p,i)=>{
+    const m=new THREE.Mesh(geom,mats[p.group]);
+    m.position.set(p.x,p.y,p.z);
+    m.userData={index:i,group:p.group,cls:p.cls,x:p.x,y:p.y,z:p.z};
+    scene.add(m); pointMeshes.push(m);
+  });
+}
+
+function buildCentroidObjects(){
+  centroidMarkers.forEach(m=>scene.remove(m)); centroidMarkers=[];
+  if(centroidLines){ scene.remove(centroidLines); centroidLines=null; }
+  const groups=Object.keys(centroids);
+  if(groups.length<2) return;
+  const segs=[];
+  for(let a=0;a<groups.length;a++)
+    for(let b=a+1;b<groups.length;b++){
+      segs.push(new THREE.Vector3(...centroids[groups[a]]));
+      segs.push(new THREE.Vector3(...centroids[groups[b]]));
+    }
+  const lg=new THREE.BufferGeometry().setFromPoints(segs);
+  const lm=new THREE.LineBasicMaterial({color:0x334455,transparent:true,opacity:0.35});
+  centroidLines=new THREE.LineSegments(lg,lm);
+  scene.add(centroidLines);
+  const cg=new THREE.SphereGeometry(0.14,10,10);
+  for(const[g,c] of Object.entries(centroids)){
+    const cm=new THREE.MeshStandardMaterial({color:GROUP_COLORS[g],emissive:GROUP_COLORS[g],emissiveIntensity:0.8,roughness:0.2});
+    const mesh=new THREE.Mesh(cg,cm);
+    mesh.position.set(c[0],c[1],c[2]);
+    mesh.userData={isCentroid:true,group:g,x:c[0],y:c[1],z:c[2]};
+    scene.add(mesh); centroidMarkers.push(mesh); pointMeshes.push(mesh);
+  }
+}
+
+function buildStar(){
+  if(starMesh){ scene.remove(starMesh); starMesh=null; }
+  const g=new THREE.SphereGeometry(STAR_R,14,14);
+  const m=new THREE.MeshStandardMaterial({color:0xffd54f,emissive:0xffd54f,emissiveIntensity:0.9,roughness:0.15,metalness:0.2});
+  starMesh=new THREE.Mesh(g,m);
+  placeStarAtBlend(); scene.add(starMesh);
+}
+
+function blendPos(){
+  const b=+document.getElementById('blendBird').value;
+  const c=+document.getElementById('blendCroc').value;
+  const ma=+document.getElementById('blendMass').value;
+  const t=b+c+ma||1;
+  const wb=b/t,wc=c/t,wm=ma/t;
+  const ct=centroids;
+  if(!ct.Bird||!ct.Reptile||!ct.Mass) return null;
+  return{
+    x:wb*ct.Bird[0]+wc*ct.Reptile[0]+wm*ct.Mass[0],
+    y:wb*ct.Bird[1]+wc*ct.Reptile[1]+wm*ct.Mass[1],
+    z:wb*ct.Bird[2]+wc*ct.Reptile[2]+wm*ct.Mass[2]
+  };
+}
+function placeStarAtBlend(){ if(!starMesh) return; const p=blendPos(); if(p) starMesh.position.set(p.x,p.y,p.z); }
+
+function onMM(e){
+  const cv=document.getElementById('threeCanvas');
+  const r=cv.getBoundingClientRect();
+  mouse.x=((e.clientX-r.left)/r.width)*2-1;
+  mouse.y=-((e.clientY-r.top)/r.height)*2+1;
+  raycaster.setFromCamera(mouse,camera);
+  const hits=raycaster.intersectObjects(pointMeshes);
+  const tip=document.getElementById('tooltip');
+  if(hits.length>0){
+    const ud=hits[0].object.userData;
+    if(hoveredMesh!==hits[0].object){
+      if(hoveredMesh) hoveredMesh.scale.setScalar(1);
+      hoveredMesh=hits[0].object; hoveredMesh.scale.setScalar(2.0);
+    }
+    document.getElementById('ttGroup').textContent=ud.isCentroid?'✦ '+ud.group+' centroid':ud.group;
+    document.getElementById('ttGroup').style.color=GROUP_CSS[ud.group]||'#fff';
+    document.getElementById('ttCls').textContent=ud.isCentroid?'click to synthesize':(ud.cls||'');
+    tip.style.display='block';
+    tip.style.left=(e.clientX+14)+'px';
+    tip.style.top=(e.clientY-10)+'px';
+  } else {
+    if(hoveredMesh){ hoveredMesh.scale.setScalar(1); hoveredMesh=null; }
+    tip.style.display='none';
+  }
+}
+
+function onClick(e){
+  const cv=document.getElementById('threeCanvas');
+  const r=cv.getBoundingClientRect();
+  mouse.x=((e.clientX-r.left)/r.width)*2-1;
+  mouse.y=-((e.clientY-r.top)/r.height)*2+1;
+  raycaster.setFromCamera(mouse,camera);
+  const hits=raycaster.intersectObjects(pointMeshes);
+  if(!hits.length) return;
+  const ud=hits[0].object.userData;
+  if(ud.x===undefined) return;
+  const lbl=ud.isCentroid?'✦ '+ud.group+' centroid':ud.group+' — '+ud.cls;
+  document.getElementById('hitInfo').innerHTML=
+    '<strong>Selected:</strong> '+lbl+'<br>'+
+    '<span style="color:var(--text2)">PCA ('+ud.x.toFixed(2)+', '+ud.y.toFixed(2)+', '+ud.z.toFixed(2)+')</span>';
+  synthesizePoint(ud.x,ud.y,ud.z);
+  generateAnimalImage(ud.group||'Blend', ud.x, ud.y, ud.z, lbl);
+}
+
+function getQ(){
+  return{
+    sharpness:      +document.getElementById('qSharp').value/10,
+    gate:           +document.getElementById('qGate').value/100,
+    preemphasis:    +document.getElementById('qPreemph').value/100,
+    sobel_strength: +document.getElementById('qSobel').value/10,
+    temporal_smooth:+document.getElementById('qTsmooth').value/10
+  };
+}
+
+async function synthesizePoint(x,y,z){
+  const btn=document.getElementById('blendSynthBtn');
+  const stat=document.getElementById('synthStatus');
+  btn.disabled=true; stat.textContent='⏳ Synthesizing…'; stat.style.color='var(--text2)';
+  if(starMesh) starMesh.position.set(x,y,z);
+  try{
+    const res=await fetch('/api/synth-from-pca',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({x,y,z,...getQ()})
+    });
+    const data=await res.json();
+    if(data.error) throw new Error(data.error);
+    if(data.spec){
+      document.getElementById('specPlaceholder').style.display='none';
+      const img=document.getElementById('specImg');
+      img.src='data:image/png;base64,'+data.spec;
+      img.style.display='block';
+    }
+    if(data.wav){
+      const pl=document.getElementById('audioPlayer');
+      pl.src='data:audio/wav;base64,'+data.wav;
+      pl.style.display='block';
+      pl.play().catch(()=>{});
+    }
+    stat.textContent='✓ Done  |  ‖z‖ = '+(data.z_norm?data.z_norm.toFixed(2):'—');
+    stat.style.color='var(--green)';
+  }catch(err){
+    stat.textContent='✗ '+err.message; stat.style.color='#ff5566';
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+function synthesizeBlend(){
+  const p=blendPos(); if(!p) return;
+  document.getElementById('hitInfo').innerHTML=
+    '<strong>Blend synthesis</strong><br>'+
+    '<span style="color:var(--text2)">PCA ('+p.x.toFixed(2)+', '+p.y.toFixed(2)+', '+p.z.toFixed(2)+')</span>';
+  synthesizePoint(p.x,p.y,p.z);
+  generateAnimalImage('Blend', p.x, p.y, p.z, 'Blend');
+}
+
+function updateBlend(){
+  ['Bird','Croc','Mass'].forEach(k=>{
+    document.getElementById('blend'+k+'Val').textContent=document.getElementById('blend'+k).value;
+  });
+  placeStarAtBlend();
+}
+
+function updateQ(){
+  document.getElementById('qSharpV').textContent  =(+document.getElementById('qSharp').value/10).toFixed(1);
+  document.getElementById('qGateV').textContent   =(+document.getElementById('qGate').value/100).toFixed(2);
+  document.getElementById('qPreemphV').textContent=(+document.getElementById('qPreemph').value/100).toFixed(2);
+  document.getElementById('qSobelV').textContent  =(+document.getElementById('qSobel').value/10).toFixed(1);
+  document.getElementById('qTsmoothV').textContent=(+document.getElementById('qTsmooth').value/10).toFixed(1);
+}
+
+function toggleAxesVis(){ if(axesHelper) axesHelper.visible=document.getElementById('toggleAxes').checked; }
+function toggleLinesVis(){ if(centroidLines) centroidLines.visible=document.getElementById('toggleLines').checked; }
+function toggleAutoRot(){ if(controls) { controls.autoRotate=document.getElementById('toggleAutoRotate').checked; controls.autoRotateSpeed=0.5; } }
+
+// ── AI Image Generation (Pollinations.ai / Flux) ──────────────────────────────
+const IMG_PROMPTS = {
+  Bird: [
+    'photorealistic prehistoric feathered bird dinosaur, Archaeopteryx or Microraptor, vivid plumage, lush Mesozoic jungle background, golden hour lighting, 8k wildlife photography',
+    'ancient avian dinosaur perched on fern tree, iridescent feathers, Jurassic period, BBC nature documentary still, hyperdetailed',
+    'Cretaceous bird-like theropod dinosaur mid-flight, detailed feathers, blue-green iridescence, dramatic sky, ultra realistic'
+  ],
+  Reptile: [
+    'massive prehistoric crocodilian reptile emerging from swamp, Sarcosuchus or Deinosuchus, rippling water, dramatic low angle, photorealistic 8k',
+    'ancient giant crocodile in Mesozoic river, mossy banks, atmospheric mist, BBC Planet Earth cinematography, ultra detailed scales',
+    'prehistoric alligator-like reptile resting on Cretaceous shoreline, golden sunset, dramatic shadows, National Geographic quality'
+  ],
+  Mass: [
+    'dramatic Cretaceous-Paleogene extinction event scene, diverse dinosaurs fleeing asteroid impact, fire and ash sky, epic cinematic wide shot, ultra detailed, 8k',
+    'prehistoric landscape during mass extinction, giant dinosaur silhouettes against burning sky, asteroid glow on horizon, Jurassic Park cinematic quality',
+    'mixed prehistoric creatures bird and reptile hybrid in primordial Mesozoic fog, surreal transition, award-winning digital art'
+  ],
+  Blend: [
+    'hybrid prehistoric creature part bird part reptile, seamless feather-scale fusion, Mesozoic jungle, hyper-realistic scientific illustration',
+    'chimeric dinosaur evolution study: avian and reptilian morphology, detailed anatomy, museum natural history diorama lighting',
+    'speculative palaeontology: transitional dinosaur species bridging bird and crocodile lineage, vivid colours, 8k render'
+  ]
+};
+
+function buildImagePrompt(group, x, y, z) {
+  const pool = IMG_PROMPTS[group] || IMG_PROMPTS.Blend;
+  // Use PCA distance from origin to pick prompt variation
+  const dist = Math.sqrt(x*x + y*y + z*z);
+  const idx  = Math.floor(dist * 3) % pool.length;
+  const base = pool[idx];
+  // Add directional flavour from PCA sign
+  const size  = dist > 3.5 ? 'enormous, apex predator, ' : dist < 1.5 ? 'small, nimble, ' : '';
+  const mood  = z > 0 ? 'vibrant alive ecosystem, ' : 'ancient, fossil-like, ';
+  return size + mood + base + ', no text, no watermark';
+}
+
+async function generateAnimalImage(group, x, y, z, label) {
+  const spinner = document.getElementById('imgSpinner');
+  const imgEl   = document.getElementById('animalImg');
+  const ph      = document.getElementById('imgPlaceholder');
+  const info    = document.getElementById('imgPromptInfo');
+
+  ph.style.display    = 'none';
+  imgEl.style.display = 'none';
+  spinner.style.display = 'flex';
+  info.textContent = '';
+
+  try {
+    const res  = await fetch('/api/generate-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ group, x, y, z, steps: 4, width: 512, height: 512 })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    imgEl.src = 'data:image/png;base64,' + data.image;
+    imgEl.style.display = 'block';
+    info.textContent = '🎨 ' + (data.prompt || '').slice(0, 110) + '…';
+  } catch(err) {
+    ph.style.display = 'block';
+    ph.textContent   = '⚠ ' + err.message;
+  } finally {
+    spinner.style.display = 'none';
+  }
+}
+
+// Delay init until after first layout paint so flex sizes are settled
+console.log('Initialising Three.js scene...');
+requestAnimationFrame(() => { initThree(); loadData(); });
+</script>
+</body>
+</html>

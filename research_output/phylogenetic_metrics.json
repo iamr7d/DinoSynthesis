@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-03-02 21:24:16",
+  "model_meta": {
+    "checkpoint": "checkpoints/best.pt",
+    "epoch": 98,
+    "best_val": 0.11706968148549397
+  },
+  "blend": {
+    "bird_w": 0.5,
+    "croc_w": 0.5,
+    "mass_w": 0.0
+  },
+  "latent_metrics": {
+    "lde": 0.0,
+    "lde_from_target": 0.0,
+    "alignment_target": 1.0,
+    "alignment_target_pct": 100.0,
+    "alignment_raw": 1.0,
+    "alignment_raw_pct": 100.0,
+    "bird_coeff": 0.5,
+    "croc_coeff": 0.5,
+    "midpoint_norm": 0.35004910826683044,
+    "blend_target_norm": 0.35004910826683044,
+    "dino_norm": 0.35004910826683044
+  },
+  "spectral_metrics": {
+    "spectral_centroid_hz": 6632.81,
+    "peak_frequency_hz": 5663.23,
+    "f1_accuracy_pct": 0.0,
+    "fossil_target_hz": 800.0
+  },
+  "wav_path": "/home/rahulraj/MRES/research_output/dino_eval_synthesis.wav"
+}

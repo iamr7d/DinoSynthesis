@@ -1,0 +1,116 @@
+
+=======================================================
+Category: Crocodile
+  Searching: 'crocodile vocalization sound'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'crocodile call recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'nile crocodile sound'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'saltwater crocodile call'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'crocodylus sound recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 2 unique IA items found
+Crocodile:   0%|          | 0/2 [00:00<?, ?item/s]Crocodile:  50%|█████     | 1/2 [00:02<00:02,  2.81s/item]Crocodile: 100%|██████████| 2/2 [00:05<00:00,  2.78s/item]Crocodile: 100%|██████████| 2/2 [00:05<00:00,  2.79s/item]
+  → 0 files saved for Crocodile
+
+=======================================================
+Category: Alligator
+  Searching: 'alligator bellow sound'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'american alligator vocalization'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'alligator mating bellow'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'alligator hatchling call'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 2 unique IA items found
+Alligator:   0%|          | 0/2 [00:00<?, ?item/s]Alligator:  50%|█████     | 1/2 [00:02<00:02,  2.85s/item]Alligator: 100%|██████████| 2/2 [00:05<00:00,  2.81s/item]Alligator: 100%|██████████| 2/2 [00:05<00:00,  2.82s/item]
+  → 0 files saved for Alligator
+
+=======================================================
+Category: Caiman
+  Searching: 'caiman sound recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'caiman vocalization'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'spectacled caiman call'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 0 unique IA items found
+Caiman: 0item [00:00, ?item/s]Caiman: 0item [00:00, ?item/s]
+  → 0 files saved for Caiman
+
+=======================================================
+Category: Gharial
+  Searching: 'gharial sound recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'gavial vocalization'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 0 unique IA items found
+Gharial: 0item [00:00, ?item/s]Gharial: 0item [00:00, ?item/s]
+  → 0 files saved for Gharial
+
+=======================================================
+Category: Elephant
+  Searching: 'african elephant vocalization'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'elephant infrasound recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'elephant rumble call'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'elephant trumpet sound'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'elephant contact call'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 3 unique IA items found
+Elephant:   0%|          | 0/3 [00:00<?, ?item/s]Elephant:  33%|███▎      | 1/3 [00:02<00:05,  2.79s/item]Elephant:  67%|██████▋   | 2/3 [00:05<00:02,  2.78s/item]Elephant: 100%|██████████| 3/3 [00:08<00:00,  2.89s/item]Elephant: 100%|██████████| 3/3 [00:08<00:00,  2.86s/item]
+  → 0 files saved for Elephant
+
+=======================================================
+Category: Humpback_Whale
+  Searching: 'humpback whale song recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'humpback whale vocalization'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'megaptera novaeangliae song'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 3 unique IA items found
+Humpback_Whale:   0%|          | 0/3 [00:00<?, ?item/s]Humpback_Whale:  33%|███▎      | 1/3 [00:02<00:05,  2.82s/item]Humpback_Whale:  67%|██████▋   | 2/3 [00:05<00:02,  2.79s/item]Humpback_Whale: 100%|██████████| 3/3 [00:08<00:00,  2.80s/item]Humpback_Whale: 100%|██████████| 3/3 [00:08<00:00,  2.80s/item]
+  → 0 files saved for Humpback_Whale
+
+=======================================================
+Category: Blue_Whale
+  Searching: 'blue whale call recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'blue whale vocalization'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'balaenoptera musculus sound'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 2 unique IA items found
+Blue_Whale:   0%|          | 0/2 [00:00<?, ?item/s]Blue_Whale:  50%|█████     | 1/2 [00:02<00:02,  2.81s/item]Blue_Whale: 100%|██████████| 2/2 [00:05<00:00,  2.82s/item]Blue_Whale: 100%|██████████| 2/2 [00:05<00:00,  2.82s/item]
+  → 0 files saved for Blue_Whale
+
+=======================================================
+Category: Sperm_Whale
+  Searching: 'sperm whale click recording'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'sperm whale codas'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  Searching: 'physeter macrocephalus sound'
+  [warn] Search failed: search_items() got an unexpected keyword argument 'num_found'
+  → 0 unique IA items found
+Sperm_Whale: 0item [00:00, ?item/s]Sperm_Whale: 0item [00:00, ?item/s]
+  → 0 files saved for Sperm_Whale
+
+=======================================================
+Total new files downloaded: 0
+
+Full dataset summary:
+  Cassowary                     :   31 files
+  Emu                           :   20 files
+  Kiwi                          :   45 files
+  Ostrich                       :   45 files
+  Rhea                          :   27 files
+  Tinamou_Crypturellus          :  206 files
+  Tinamou_Tinamus               :  332 files

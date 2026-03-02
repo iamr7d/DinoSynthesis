@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DinoSynthesis — Phylogenetic Vocalization Research</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:       #07090d;
+  --surface:  #0f1117;
+  --surface2: #161a22;
+  --border:   #1e2330;
+  --accent:   #e05c2a;
+  --accent2:  #ff8c42;
+  --muted:    #5a6070;
+  --text:     #dde0e8;
+  --text2:    #8a8fa0;
+  --bird:     #00e5ff;
+  --croc:     #ff3366;
+  --mass:     #cc44ff;
+  --green:    #3ecf74;
+}
+html, body {
+  min-height: 100%; background: var(--bg);
+  color: var(--text); font-family: -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+/* ── Nav ────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 56px;
+  background: rgba(7,9,13,0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--text);
+            text-decoration: none; text-transform: uppercase; }
+.nav-links { display: flex; gap: 8px; }
+.nav-btn   { font-size: 13px; padding: 7px 16px; border-radius: 6px; cursor: pointer;
+             text-decoration: none; transition: all .15s; border: 1px solid transparent; }
+.nav-btn.ghost { color: var(--text2); border-color: var(--border);
+                 background: transparent; }
+.nav-btn.ghost:hover { border-color: var(--accent2); color: var(--text); }
+.nav-btn.fill  { background: linear-gradient(135deg, var(--accent), var(--accent2));
+                 color: white; font-weight: 600; }
+.nav-btn.fill:hover { opacity: .88; }
+
+/* ── Hero ───────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 64px; text-align: center; position: relative; overflow: hidden;
+}
+/* Subtle gradient mesh */
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 60%, rgba(224,92,42,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 40%, rgba(0,229,255,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 50% 80%, rgba(204,68,255,.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ""; flex: 1; max-width: 60px; height: 1px; background: var(--border);
+}
+h1 {
+  font-size: clamp(42px, 8vw, 80px); font-weight: 900; letter-spacing: -2px;
+  line-height: 1.05; margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--accent) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px); color: var(--text2); max-width: 620px;
+  margin: 0 auto 40px; line-height: 1.7;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 64px; }
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 600; padding: 13px 28px;
+  border-radius: 8px; cursor: pointer; text-decoration: none; transition: all .15s;
+  border: 1px solid transparent;
+}
+.hero-btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+}
+.hero-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(224,92,42,.35); }
+.hero-btn.secondary {
+  background: var(--surface2); color: var(--text); border-color: var(--border);
+}
+.hero-btn.secondary:hover { border-color: var(--accent2); transform: translateY(-2px); }
+
+/* ── Stats strip ────────────────────────────────────────────────────── */
+.stats-strip {
+  display: flex; gap: 0; border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; background: var(--surface);
+  width: 100%; max-width: 720px; flex-wrap: wrap;
+}
+.stat {
+  flex: 1; min-width: 140px; padding: 20px 24px;
+  border-right: 1px solid var(--border); text-align: center;
+}
+.stat:last-child { border-right: none; }
+.stat-value { font-size: 26px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+.stat-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+              color: var(--muted); margin-top: 2px; }
+.stat-value.bird    { color: var(--bird); }
+.stat-value.croc    { color: var(--croc); }
+.stat-value.mass    { color: var(--mass); }
+.stat-value.acc     { color: var(--green); }
+
+/* ── Section ────────────────────────────────────────────────────────── */
+section { padding: 80px 24px; }
+.section-inner { max-width: 1060px; margin: 0 auto; }
+.section-title {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 32px; text-align: center;
+}
+
+/* ── Feature cards ──────────────────────────────────────────────────── */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 32px 28px;
+  text-decoration: none; color: var(--text);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden;
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; border-radius: 12px;
+  background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,.02));
+  pointer-events: none;
+}
+.card:hover { border-color: var(--accent2); transform: translateY(-4px);
+              box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.card-icon  { font-size: 32px; }
+.card-title { font-size: 19px; font-weight: 700; }
+.card-desc  { font-size: 14px; color: var(--text2); line-height: 1.7; flex: 1; }
+.card-link  { font-size: 13px; color: var(--accent2); display: flex; align-items: center; gap: 4px; }
+.card-tag   {
+  display: inline-block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; font-weight: 600; margin-bottom: 4px;
+}
+.tag-blue   { background: rgba(0,229,255,.12);  color: var(--bird); }
+.tag-red    { background: rgba(255,51,102,.12); color: var(--croc); }
+.tag-violet { background: rgba(204,68,255,.12); color: var(--mass); }
+.tag-amber  { background: rgba(255,140,66,.12); color: var(--accent2); }
+
+/* ── Latent map preview ─────────────────────────────────────────────── */
+.map-preview {
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  position: relative; background: #05070a;
+}
+.map-preview img { width: 100%; display: block; }
+.map-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 20px 24px; background: linear-gradient(transparent, rgba(5,7,10,.92));
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.map-overlay-text { font-size: 13px; color: var(--text2); }
+.map-overlay-link {
+  font-size: 13px; color: var(--accent2); text-decoration: none;
+  border: 1px solid var(--accent2); padding: 6px 14px; border-radius: 6px;
+  transition: background .15s;
+}
+.map-overlay-link:hover { background: rgba(255,140,66,.1); }
+
+/* ── Method strip ───────────────────────────────────────────────────── */
+.method-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden;
+}
+.method-item {
+  background: var(--surface); padding: 24px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.method-num { font-size: 11px; letter-spacing: 2px; color: var(--muted); }
+.method-head { font-size: 15px; font-weight: 700; }
+.method-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── Python block ───────────────────────────────────────────────────── */
+pre {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 20px 24px; font-size: 13px; line-height: 1.8; overflow-x: auto;
+  color: #a8d8a8; font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+.kw   { color: #c792ea; }
+.str  { color: #c3e88d; }
+.cmt  { color: #546e7a; font-style: italic; }
+.fn   { color: #82aaff; }
+.num  { color: #f78c6c; }
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+footer {
+  text-align: center; padding: 40px 24px;
+  border-top: 1px solid var(--border); font-size: 13px; color: var(--muted);
+}
+
+/* ── Status dot ─────────────────────────────────────────────────────── */
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; margin-right: 4px; }
+.dot.ready   { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.dot.loading { background: var(--accent2); animation: pulse 1s infinite; }
+.dot.error   { background: #ff5555; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .stats-strip { flex-direction: column; }
+  .stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a class="nav-logo" href="/">DinoSynthesis</a>
+  <div class="nav-links">
+    <a class="nav-btn ghost" href="/latent">Latent Space</a>
+    <a class="nav-btn fill"  href="/synth">Open Synthesizer →</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow">MRES — Machine Learning in Ecology</div>
+  <h1>DinoSynthesis</h1>
+  <p class="hero-sub">
+    A β-VAE that navigates the <em>phylogenetic latent space</em> between living archosaur groups
+    to reconstruct the hypothetical vocalizations of non-avian dinosaurs.
+  </p>
+  <div class="hero-btns">
+    <a class="hero-btn primary" href="/synth">🦕 Open Synthesizer</a>
+    <a class="hero-btn secondary" href="/latent">🗺 Explore Latent Space</a>
+  </div>
+  <div class="stats-strip">
+    <div class="stat">
+      <div class="stat-value bird">426</div>
+      <div class="stat-label">Bird tensors</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value croc">426</div>
+      <div class="stat-label">Reptile tensors</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value mass">426</div>
+      <div class="stat-label">Mass tensors</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value acc">0.0655</div>
+      <div class="stat-label">Val loss</div>
+    </div>
+  </div>
+</div>
+
+<!-- Feature cards -->
+<section style="background: var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-title">Explore the Project</div>
+    <div class="cards">
+
+      <a class="card" href="/synth">
+        <span class="card-tag tag-amber">Interactive</span>
+        <div class="card-icon">🎛</div>
+        <div class="card-title">Vocalization Synthesizer</div>
+        <div class="card-desc">
+          Upload any sound or blend three anchor groups — Bird, Reptile, Mass — 
+          to decode a novel vocalization from the latent midpoint. Adjust sharpness, 
+          Sobel filtering, and latent jitter to refine the output.
+        </div>
+        <div class="card-link">Open synthesizer →</div>
+      </a>
+
+      <a class="card" href="/latent">
+        <span class="card-tag tag-blue">Visualization</span>
+        <div class="card-icon">🗺</div>
+        <div class="card-title">Latent Universe Map</div>
+        <div class="card-desc">
+          PCA projection of the full 128-dimensional latent space. 
+          Explore the three phylogenetic clusters and drag the synthesis 
+          midpoint to see where your blend falls in acoustic-biological space.
+        </div>
+        <div class="card-link">View latent map →</div>
+      </a>
+
+      <a class="card" href="#methodology">
+        <span class="card-tag tag-violet">Methodology</span>
+        <div class="card-icon">🔬</div>
+        <div class="card-title">Research Methodology</div>
+        <div class="card-desc">
+          β-VAE with strategic undersampling for phylogenetic symmetry. 
+          Balanced 1:1:1 parity across Bird, Reptile, and Mass anchor groups 
+          improved validation loss by 8.2% over the biased baseline.
+        </div>
+        <div class="card-link">Read method ↓</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Latent map preview -->
+<section>
+  <div class="section-inner">
+    <div class="section-title">The Synthesis Triangle</div>
+    <div class="map-preview">
+      <img src="/research/latent_map.png" alt="Phylogenetic Latent Universe"
+           onerror="this.parentElement.style.display='none'">
+      <div class="map-overlay">
+        <div class="map-overlay-text">
+          PCA projection · 1,278 tensors · 128D → 2D
+        </div>
+        <a class="map-overlay-link" href="/latent">Interactive version →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Methodology -->
+<section id="methodology" style="background: var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-title">Methodology</div>
+    <div class="method-grid">
+      <div class="method-item">
+        <div class="method-num">01</div>
+        <div class="method-head">Data Collection</div>
+        <div class="method-text">
+          1,182 MP3s sourced from iNaturalist, Internet Archive, and FreeSound
+          across 11 phylogenetic classes in three anchor groups: Aves (Palaeognathae),
+          Crocodylia (Reptilia), and Mammalia Mass (Whippomorpha, Elephantidae, Phocoidea).
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-num">02</div>
+        <div class="method-head">Preprocessing</div>
+        <div class="method-text">
+          Log-Mel spectrogram patches (128 mels × 256 frames) normalized to [0,1].
+          Each recording chunked into non-overlapping 3-second windows.
+          SNR grading (A/B/C/D) used to quarantine grade-D noise fills.
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-num">03</div>
+        <div class="method-head">Phylogenetic Parity</div>
+        <div class="method-text">
+          Strategic undersampling capped all groups at the Reptile floor (426 tensors).
+          This eliminated the 24:1 Bird-to-Reptile bias present in the raw dataset,
+          improving validation reconstruction loss from 0.0714 → <strong style="color:var(--green)">0.0655</strong>.
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-num">04</div>
+        <div class="method-head">β-VAE Architecture</div>
+        <div class="method-text">
+          4-stage residual encoder with Squeeze-Excitation, 128-dim latent space,
+          β = 2.0 KL pressure, free-bits floor 0.5 nats/dim, 40-epoch KL warm-up.
+          Group-weighted sampler ensures equal batch representation.
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-num">05</div>
+        <div class="method-head">Latent Blending</div>
+        <div class="method-text">
+          Per-class centroids computed from 200 encoded μ-vectors each.
+          Blended latent: z = Σ w<sub>i</sub>·c<sub>i</sub> / Σ w<sub>i</sub>.
+          Griffin-Lim (128 iters) with optional Sobel sharpening and latent jitter.
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-num">06</div>
+        <div class="method-head">Synthesis</div>
+        <div class="method-text">
+          The midpoint z<sub>dino</sub> = 0.5·z<sub>bird</sub> + 0.5·z<sub>croc</sub>
+          represents the hypothetical ancestral archosaur vocal anatomy prior to
+          avian syrinx and crocodilian glottis specialization.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Code snippet -->
+<section>
+  <div class="section-inner">
+    <div class="section-title">Core Synthesis Logic</div>
+    <pre><span class="cmt"># Blend latent centroids by phylogenetic weight</span>
+z_blend = (<span class="num">0.5</span> * centroids[<span class="str">"bird"</span>]
+         + <span class="num">0.5</span> * centroids[<span class="str">"croc"</span>])
+
+<span class="cmt"># Decode from latent midpoint → spectrogram</span>
+spec = model.<span class="fn">decode</span>(z_blend.<span class="fn">unsqueeze</span>(<span class="num">0</span>))
+
+<span class="cmt"># Griffin-Lim inversion → waveform</span>
+wav = <span class="fn">hifi_griffinlim</span>(spec, n_iter=<span class="num">128</span>, gate=<span class="num">0.05</span>, sobel_strength=<span class="num">1.0</span>)</pre>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div style="margin-bottom:12px">
+    <span><span class="dot loading" id="footer-dot"></span>
+    <span id="footer-status">Checking model…</span></span>
+  </div>
+  <div>
+    MRes Machine Learning in Ecology ·
+    β-VAE v3 (Balanced) · best_val = 0.065539 · Epoch 95/150
+  </div>
+</footer>
+
+<script>
+async function checkStatus() {
+  const dot  = document.getElementById('footer-dot');
+  const txt  = document.getElementById('footer-status');
+  try {
+    const r = await fetch('/api/status');
+    const d = await r.json();
+    if (d.ready) {
+      dot.className = 'dot ready';
+      txt.textContent = `Model ready · ${d.device} · ${d.latent_points ?? '—'} latent points`;
+    } else if (d.error) {
+      dot.className = 'dot error';
+      txt.textContent = 'Error: ' + d.error;
+    } else {
+      setTimeout(checkStatus, 2000);
+    }
+  } catch(e) { setTimeout(checkStatus, 3000); }
+}
+checkStatus();
+</script>
+</body>
+</html>

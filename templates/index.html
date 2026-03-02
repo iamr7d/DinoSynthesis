@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DinoSynthesis — Latent Vocalization Explorer</title>
+<style>
+/* ─── Reset & base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d0d0f;
+  --surface:   #161618;
+  --surface2:  #1e1e21;
+  --border:    #2a2a2e;
+  --accent:    #e05c2a;
+  --accent2:   #ff8c42;
+  --muted:     #6b6b72;
+  --text:      #e8e8ed;
+  --text2:     #a0a0aa;
+  --green:     #3ecf74;
+  --bird:      #4a9eff;
+  --croc:      #3ecf74;
+  --mass:      #b96bff;
+  --input-clr: #ffcc44;
+  --radius:    10px;
+  --shadow:    0 4px 24px rgba(0,0,0,0.5);
+}
+
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, 'Segoe UI', sans-serif; font-size: 15px; line-height: 1.5; }
+
+/* ─── Nav ──────────────────────────────────────────────────────────── */
+.site-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 48px;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 50;
+}
+.site-nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 2px;
+                 text-transform: uppercase; color: var(--text); text-decoration: none; }
+.site-nav-links { display: flex; gap: 6px; }
+.nav-pill { font-size: 12px; padding: 5px 12px; border-radius: 5px; cursor: pointer;
+            text-decoration: none; transition: all .12s; border: 1px solid var(--border);
+            color: var(--text2); background: transparent; }
+.nav-pill:hover { border-color: var(--accent2); color: var(--text); }
+.nav-pill.active { background: var(--surface2); color: var(--text); }
+
+/* ─── Layout ───────────────────────────────────────────────────────── */
+.page    { max-width: 1080px; margin: 0 auto; padding: 32px 24px 64px; }
+.row     { display: flex; gap: 20px; }
+.col     { flex: 1; min-width: 0; }
+
+/* ─── Header ───────────────────────────────────────────────────────── */
+header { text-align: center; margin-bottom: 40px; }
+.logo  { font-size: 13px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+h1     { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -1px;
+         background: linear-gradient(135deg, var(--accent2), var(--accent));
+         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.tagline { color: var(--text2); font-size: 14px; margin-top: 8px; }
+.status-bar { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+              font-size: 12px; color: var(--muted); background: var(--surface);
+              border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); transition: background .3s; }
+.dot.ready  { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.dot.error  { background: #ff5555; }
+.dot.loading { animation: pulse 1s infinite; background: var(--accent2); }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+/* ─── Card ─────────────────────────────────────────────────────────── */
+.card { background: var(--surface); border: 1px solid var(--border);
+        border-radius: var(--radius); padding: 24px; }
+.card + .card { margin-top: 20px; }
+.card-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+              color: var(--muted); margin-bottom: 16px; }
+
+/* ─── Upload zone ──────────────────────────────────────────────────── */
+#drop-zone { border: 2px dashed var(--border); border-radius: var(--radius);
+             padding: 40px 24px; text-align: center; cursor: pointer;
+             transition: border-color .2s, background .2s; position: relative; }
+#drop-zone:hover, #drop-zone.drag-over { border-color: var(--accent2); background: rgba(255,140,66,.05); }
+#drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-icon { font-size: 40px; margin-bottom: 12px; }
+.upload-text { color: var(--text2); font-size: 14px; }
+.upload-text strong { color: var(--text); }
+#file-name { margin-top: 10px; font-size: 13px; color: var(--accent2); min-height: 20px; }
+
+/* Waveform mini-preview */
+#input-audio-wrap { display: none; margin-top: 14px; }
+#input-audio-wrap audio { width: 100%; height: 36px; accent-color: var(--input-clr); }
+
+/* ─── Sliders ──────────────────────────────────────────────────────── */
+.slider-grid { display: grid; gap: 14px; }
+.slider-row  { display: grid; grid-template-columns: 130px 1fr 48px; align-items: center; gap: 12px; }
+.slider-label { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 6px; }
+.swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.swatch.bird  { background: var(--bird); }
+.swatch.croc  { background: var(--croc); }
+.swatch.mass  { background: var(--mass); }
+.swatch.inp   { background: var(--input-clr); }
+
+input[type=range] { -webkit-appearance: none; width: 100%; height: 4px;
+                    border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px;
+  border-radius: 50%; background: var(--accent2); border: 2px solid var(--bg); transition: transform .1s; }
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+.slider-val { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--text); text-align: right; }
+
+/* Preset buttons */
+.presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.preset-btn { font-size: 12px; padding: 5px 12px; border-radius: 20px; cursor: pointer;
+              border: 1px solid var(--border); background: transparent; color: var(--text2);
+              transition: all .15s; white-space: nowrap; }
+.preset-btn:hover { border-color: var(--accent2); color: var(--text); background: rgba(255,140,66,.08); }
+
+/* ─── Synthesize button ─────────────────────────────────────────────── */
+#synth-btn { width: 100%; margin-top: 20px; padding: 14px; font-size: 16px; font-weight: 700;
+             letter-spacing: .5px; border: none; border-radius: var(--radius); cursor: pointer;
+             background: linear-gradient(135deg, var(--accent), var(--accent2));
+             color: white; transition: opacity .2s, transform .1s; }
+#synth-btn:hover:not(:disabled)  { opacity: .9; }
+#synth-btn:active:not(:disabled) { transform: scale(.98); }
+#synth-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ─── Spinner ───────────────────────────────────────────────────────── */
+.spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,.2);
+           border-top-color: white; border-radius: 50%; animation: spin .7s linear infinite;
+           margin: 0 auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Results ───────────────────────────────────────────────────────── */
+#results { display: none; margin-top: 20px; }
+.spec-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.spec-block h3 { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+                 color: var(--muted); margin-bottom: 8px; }
+.spec-block img { width: 100%; border-radius: 6px; display: block; background: #111; }
+.spec-block audio { width: 100%; margin-top: 8px; height: 36px; accent-color: var(--accent2); }
+
+.z-info { display: flex; align-items: center; justify-content: center; gap: 8px;
+          font-size: 12px; color: var(--muted); margin-top: 8px; }
+.z-badge { font-variant-numeric: tabular-nums; color: var(--text2);
+           background: var(--surface2); border: 1px solid var(--border);
+           border-radius: 4px; padding: 2px 8px; font-size: 12px; }
+
+/* Download button */
+.dl-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 7px 14px;
+          border-radius: 6px; border: 1px solid var(--border); background: transparent;
+          color: var(--text2); cursor: pointer; text-decoration: none; transition: all .15s; margin-top: 8px; }
+.dl-btn:hover { border-color: var(--accent2); color: var(--text); background: rgba(255,140,66,.08); }
+
+/* ─── Error toast ───────────────────────────────────────────────────── */
+#error-msg { display: none; margin-top: 12px; padding: 12px 16px; background: rgba(255,85,85,.12);
+             border: 1px solid rgba(255,85,85,.3); border-radius: var(--radius);
+             color: #ff9999; font-size: 13px; }
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .row      { flex-direction: column; }
+  .spec-compare { grid-template-columns: 1fr; }
+  .slider-row { grid-template-columns: 110px 1fr 40px; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a class="site-nav-logo" href="/">DinoSynthesis</a>
+  <div class="site-nav-links">
+    <a class="nav-pill" href="/">Home</a>
+    <a class="nav-pill" href="/latent">Latent Space</a>
+    <a class="nav-pill active" href="/synth">Synthesizer</a>
+  </div>
+</nav>
+<div class="page">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">MRES — Machine Learning in Ecology</div>
+    <h1>DinoSynthesis</h1>
+    <p class="tagline">Reconstruct a non-avian dinosaur vocalization by blending latent acoustic 'DNA'</p>
+    <div class="status-bar">
+      <div class="dot loading" id="status-dot"></div>
+      <span id="status-text">Initialising model…</span>
+    </div>
+  </header>
+
+  <div class="row">
+
+    <!-- Left column: upload + controls -->
+    <div class="col" style="max-width:480px">
+
+      <!-- Upload -->
+      <div class="card">
+        <div class="card-title">1 — Upload Your Audio (optional)</div>
+        <div id="drop-zone">
+          <input type="file" id="audio-file" accept="audio/*">
+          <div class="upload-icon">🎙</div>
+          <div class="upload-text"><strong>Click or drag</strong> any audio file here<br>
+            <span style="font-size:12px;color:var(--muted)">MP3 · WAV · OGG · FLAC · M4A</span>
+          </div>
+          <div id="file-name"></div>
+        </div>
+        <div id="input-audio-wrap">
+          <audio id="input-audio" controls></audio>
+        </div>
+      </div>
+
+      <!-- Blend controls -->
+      <div class="card">
+        <div class="card-title">2 — Set Blend Weights</div>
+
+        <div class="presets">
+          <button class="preset-btn" onclick="setPreset('dino')">🦕 Dino (50/50 + mass)</button>
+          <button class="preset-btn" onclick="setPreset('bird')">🐦 Pure Bird</button>
+          <button class="preset-btn" onclick="setPreset('croc')">🐊 Pure Croc</button>
+          <button class="preset-btn" onclick="setPreset('mass')">🐋 Pure Mass</button>
+          <button class="preset-btn" onclick="setPreset('input')">🎙 Your Sound Only</button>
+        </div>
+
+        <div class="slider-grid">
+
+          <div class="slider-row" id="input-slider-row">
+            <label class="slider-label"><span class="swatch inp"></span>Your Sound</label>
+            <input type="range" id="w_input" min="0" max="100" value="0" step="1"
+                   style="--fill: var(--input-clr)"
+                   oninput="updateSlider('w_input')">
+            <span class="slider-val" id="w_input_val">0%</span>
+          </div>
+
+          <div class="slider-row">
+            <label class="slider-label"><span class="swatch bird"></span>Bird (Tinamou)</label>
+            <input type="range" id="w_bird" min="0" max="100" value="40"
+                   oninput="updateSlider('w_bird')">
+            <span class="slider-val" id="w_bird_val">40%</span>
+          </div>
+
+          <div class="slider-row">
+            <label class="slider-label"><span class="swatch croc"></span>Croc (Crocodylia)</label>
+            <input type="range" id="w_croc" min="0" max="100" value="40"
+                   oninput="updateSlider('w_croc')">
+            <span class="slider-val" id="w_croc_val">40%</span>
+          </div>
+
+          <div class="slider-row">
+            <label class="slider-label"><span class="swatch mass"></span>Mass (Whippomorpha)</label>
+            <input type="range" id="w_mass" min="0" max="100" value="20"
+                   oninput="updateSlider('w_mass')">
+            <span class="slider-val" id="w_mass_val">20%</span>
+          </div>
+
+        </div>
+
+        <!-- Normalised breakdown -->
+        <div id="blend-bar-wrap" style="margin-top:16px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:1px">NORMALISED MIX</div>
+          <div id="blend-bar" style="display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--border)"></div>
+          <div id="blend-labels" style="display:flex;font-size:11px;color:var(--muted);margin-top:4px;gap:0"></div>
+        </div>
+
+        <button id="synth-btn" onclick="synthesize()">Synthesize Vocalization</button>
+        <div class="spinner" id="spinner"></div>
+        <div id="error-msg"></div>
+      </div>
+
+      <!-- Quality settings -->
+      <div class="card">
+        <div class="card-title">3 — Audio Quality</div>
+        <div class="slider-grid">
+
+          <div class="slider-row">
+            <label class="slider-label" title="Gamma sharpening applied to the spectrogram before Griffin-Lim. Suppresses noise floor and restores formant crunch.">
+              ✦ Sharpness
+            </label>
+            <input type="range" id="sharpness" min="0" max="30" value="18" step="1"
+                   oninput="updateQuality()">
+            <span class="slider-val" id="sharpness_val">1.8</span>
+          </div>
+
+          <div class="slider-row">
+            <label class="slider-label" title="Pre-emphasis filter applied after Griffin-Lim. Boosts high-frequency texture (hiss, chirp, click). 0 = off.">
+              ✦ Pre-emphasis
+            </label>
+            <input type="range" id="preemphasis" min="0" max="99" value="97" step="1"
+                   oninput="updateQuality()">
+            <span class="slider-val" id="preemphasis_val">0.97</span>
+          </div>
+
+          <div class="slider-row">
+            <label class="slider-label" title="Hard spectral gate: zero out all spectrogram values below this threshold before Griffin-Lim. Cleans up the noise floor. 0 = off.">
+              ✦ Spectral Gate
+            </label>
+            <input type="range" id="gate" min="0" max="30" value="15" step="1"
+                   oninput="updateQuality()">
+            <span class="slider-val" id="gate_val">0.15</span>
+          </div>
+
+          <div class="slider-row">
+            <label class="slider-label" title="Sobel vertical edge sharpening: enhances temporal transient lines in the spectrogram. 0 = off.">
+              ✦ Sobel Sharpening
+            </label>
+            <input type="range" id="sobel_strength" min="0" max="20" value="0" step="1"
+                   oninput="updateQuality()">
+            <span class="slider-val" id="sobel_val">0.0</span>
+          </div>
+          <div class="slider-row">
+            <label class="slider-label" title="Temporal coherence smoothing: Gaussian blur along the time axis. Eliminates frame-discontinuity AM beating (the up-down waves). 0 = off, 0.8 = mild, 1.5 = strong.">
+              ✶ Temporal Smooth
+            </label>
+            <input type="range" id="temporal_smooth" min="0" max="30" value="10" step="1"
+                   oninput="updateQuality()">
+            <span class="slider-val" id="temporal_smooth_val">1.0</span>
+          </div>
+          <div class="slider-row">
+            <label class="slider-label" title="Latent jitter: adds Gaussian noise to the blended latent vector and averages 6 decodings for organic variability. 0 = off.">
+              ✦ Latent Jitter
+            </label>
+            <input type="range" id="jitter" min="0" max="20" value="0" step="1"
+                   oninput="updateQuality()">
+            <span class="slider-val" id="jitter_val">0.00</span>
+          </div>
+
+        </div>
+
+        <!-- Dinosaur Presets -->
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--text2);text-transform:uppercase;margin-bottom:8px">🦖 Dinosaur Presets</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+            <button onclick="loadPreset('trex')" style="padding:6px;font-size:10px;font-weight:600;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:5px;cursor:pointer;transition:.1s">T-Rex</button>
+            <button onclick="loadPreset('brachio')" style="padding:6px;font-size:10px;font-weight:600;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:5px;cursor:pointer;transition:.1s">Brachiosaurus</button>
+            <button onclick="loadPreset('veloci')" style="padding:6px;font-size:10px;font-weight:600;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:5px;cursor:pointer;transition:.1s">Velociraptor</button>
+            <button onclick="loadPreset('trike')" style="padding:6px;font-size:10px;font-weight:600;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:5px;cursor:pointer;transition:.1s">Triceratops</button>
+          </div>
+        </div>
+
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7">
+        <strong style="color:var(--text2)">AM pulsing / beating waves</strong> → increase Temporal Smooth (1.0–1.5)<br>
+          <strong style="color:var(--text2)">Flat / watery</strong> → increase Sharpness + Sobel<br>
+          <strong style="color:var(--text2)">Noisy / hiss floor</strong> → increase Spectral Gate (0.10–0.20)<br>
+          <strong style="color:var(--text2)">Muffled / low rumble only</strong> → increase Pre-emphasis<br>
+          <strong style="color:var(--text2)">Too uniform / synthetic</strong> → add Latent Jitter (0.03–0.08)<br>
+          <strong style="color:var(--text2)">Distorted / crackling</strong> → reduce Sharpness + Gate
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: results -->
+    <div class="col">
+      <div class="card" id="results-placeholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:var(--muted);gap:12px">
+        <div style="font-size:48px">🦴</div>
+        <div style="font-size:14px;text-align:center">Results will appear here after synthesis</div>
+      </div>
+      <div id="results">
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div class="spec-compare">
+            <div class="spec-block" id="input-spec-block" style="display:none">
+              <h3>🎙 Your Audio</h3>
+              <img id="input-spec-img" alt="Input spectrogram">
+              <audio id="input-recon-audio" controls></audio>
+              <a class="dl-btn" id="dl-input" download="input_reconstruction.wav">⬇ Download</a>
+            </div>
+            <div class="spec-block">
+              <h3>🦕 Synthesized Vocalization</h3>
+              <img id="synth-spec-img" alt="Synthesized spectrogram">
+              <audio id="synth-audio" controls></audio>
+              <a class="dl-btn" id="dl-synth" download="dino_synthesis.wav">⬇ Download</a>
+            </div>
+          </div>
+          <div class="z-info">
+            Latent vector ‖z‖ = <span class="z-badge" id="z-norm">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row -->
+
+  <!-- About -->
+  <div class="card" style="margin-top:20px">
+    <div class="card-title">About this model — β-VAE v3 (Balanced)</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.8;max-width:780px">
+      A β-VAE (β = 2.0) trained on <strong style="color:var(--text)">1,278 balanced tensors</strong>
+      — 426 per anchor group — across 11 phylogenetic classes
+      (Tinamou × 2, Cassowary, Emu, Kiwi, Ostrich, Rhea, Crocodylia, Elephantidae, Phocoidea, Whippomorpha).
+      A strategic undersampling protocol eliminated the 24:1 Bird-to-Reptile bias, improving
+      validation reconstruction loss from 0.0714 → <strong style="color:var(--green)">0.065539</strong> (+8.2%).
+      Trained for 95 epochs (early-stopped) with KL warm-up (40 epochs), free-bits floor 0.5 nats,
+      and a <strong style="color:var(--text)">group-weighted sampler</strong> ensuring each batch is
+      exactly 1/3 Bird · 1/3 Reptile · 1/3 Mass.
+      The bird–crocodile midpoint in latent space approximates the acoustic 'DNA' of a stem archosaur
+      (†non-avian dinosaur) before body-mass scaling.
+    </p>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+      <a href="/latent" style="font-size:12px;color:var(--accent2);text-decoration:none;
+         border:1px solid var(--border);padding:5px 12px;border-radius:5px;
+         transition:border-color .12s" onmouseover="this.style.borderColor='var(--accent2)'"
+         onmouseout="this.style.borderColor='var(--border)'">🗺 View Latent Map →</a>
+      <span style="font-size:12px;color:var(--muted);padding:5px 0">
+        Held-out: 9,709 Bird + 1,377 Mass tensors reserved for future rebalancing
+      </span>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ─── Status polling ──────────────────────────────────────────────────────────
+let modelReady = false;
+const dot  = document.getElementById('status-dot');
+const stxt = document.getElementById('status-text');
+
+async function pollStatus() {
+  try {
+    const r = await fetch('/api/status');
+    const d = await r.json();
+    if (d.ready) {
+      dot.className = 'dot ready';
+      stxt.textContent = `Model ready · ${d.device} · centroids: bird=${d.centroids.bird?.toFixed(2)} croc=${d.centroids.croc?.toFixed(2)} mass=${d.centroids.mass?.toFixed(2)}`;
+      modelReady = true;
+    } else if (d.error) {
+      dot.className = 'dot error';
+      stxt.textContent = 'Error: ' + d.error;
+    } else {
+      setTimeout(pollStatus, 1500);
+    }
+  } catch(e) { setTimeout(pollStatus, 3000); }
+}
+pollStatus();
+
+// ─── File upload ─────────────────────────────────────────────────────────────
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('audio-file');
+const fileName  = document.getElementById('file-name');
+const inputAudioWrap = document.getElementById('input-audio-wrap');
+const inputAudio     = document.getElementById('input-audio');
+
+fileInput.addEventListener('change', handleFile);
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) { fileInput.files = e.dataTransfer.files; handleFile(); }
+});
+
+function handleFile() {
+  const f = fileInput.files[0];
+  if (!f) return;
+  fileName.textContent = f.name;
+  inputAudio.src = URL.createObjectURL(f);
+  inputAudioWrap.style.display = 'block';
+  document.getElementById('w_input').value = 50;
+  updateSlider('w_input');
+  updateBlendBar();
+}
+
+// ─── Sliders ──────────────────────────────────────────────────────────────────
+const sliderIds = ['w_input', 'w_bird', 'w_croc', 'w_mass'];
+
+function updateSlider(id) {
+  const v = parseInt(document.getElementById(id).value);
+  document.getElementById(id + '_val').textContent = v + '%';
+  updateBlendBar();
+}
+
+function updateBlendBar() {
+  const vals = sliderIds.map(id => parseInt(document.getElementById(id).value));
+  const total = vals.reduce((a,b) => a+b, 0);
+  const colors = ['var(--input-clr)', 'var(--bird)', 'var(--croc)', 'var(--mass)'];
+  const labels = ['You', 'Bird', 'Croc', 'Mass'];
+  const bar    = document.getElementById('blend-bar');
+  const lbls   = document.getElementById('blend-labels');
+  bar.innerHTML = ''; lbls.innerHTML = '';
+  vals.forEach((v, i) => {
+    if (v === 0 || total === 0) return;
+    const pct = (v / total * 100).toFixed(1);
+    const seg = document.createElement('div');
+    seg.style.cssText = `width:${pct}%;background:${colors[i]};opacity:0.8;`;
+    bar.appendChild(seg);
+    const lbl = document.createElement('span');
+    lbl.style.cssText = `flex:${v};text-align:center;overflow:hidden;color:${colors[i]};font-weight:600;`;
+    lbl.textContent = v>8 ? `${labels[i]} ${pct}%` : '';
+    lbls.appendChild(lbl);
+  });
+}
+updateBlendBar();
+
+// ─── Presets ──────────────────────────────────────────────────────────────────
+const PRESETS = {
+  dino:  [0, 40, 40, 20],
+  bird:  [0, 100, 0, 0],
+  croc:  [0, 0, 100, 0],
+  mass:  [0, 0, 0, 100],
+  input: [100, 0, 0, 0],
+};
+function setPreset(key) {
+  const v = PRESETS[key];
+  sliderIds.forEach((id, i) => {
+    document.getElementById(id).value = v[i];
+    updateSlider(id);
+  });
+}
+
+// ─── Quality sliders ──────────────────────────────────────────────────────────
+function updateQuality() {
+  const s  = parseInt(document.getElementById('sharpness').value) / 10;
+  const p  = parseInt(document.getElementById('preemphasis').value) / 100;
+  const g  = parseInt(document.getElementById('gate').value) / 100;
+  const so = parseInt(document.getElementById('sobel_strength').value) / 10;
+  const ji = parseInt(document.getElementById('jitter').value) / 100;
+  const ts = parseInt(document.getElementById('temporal_smooth').value) / 10;
+  document.getElementById('sharpness_val').textContent         = s.toFixed(1);
+  document.getElementById('preemphasis_val').textContent       = p.toFixed(2);
+  document.getElementById('gate_val').textContent              = g.toFixed(2);
+  document.getElementById('sobel_val').textContent             = so.toFixed(1);
+  document.getElementById('jitter_val').textContent            = ji.toFixed(2);
+  document.getElementById('temporal_smooth_val').textContent   = ts.toFixed(1);
+}
+updateQuality();
+
+// ─── Dinosaur Presets ─────────────────────────────────────────────────────────
+const DINO_PRESETS = {
+  trex: {     // T-Rex: deep, resonant, intimidating
+    sharpness: 15,        // 1.5
+    preemphasis: 90,      // 0.90
+    gate: 20,             // 0.20
+    sobel: 5,             // 0.5
+    temporal_smooth: 20,  // 2.0
+    jitter: 5,            // 0.05
+    bird: 0, croc: 100, mass: 0
+  },
+  brachio: {  // Brachiosaurus: infrasonic boom, subsonic
+    sharpness: 12,        // 1.2
+    preemphasis: 95,      // 0.95
+    gate: 25,             // 0.25
+    sobel: 2,             // 0.2
+    temporal_smooth: 25,  // 2.5
+    jitter: 2,            // 0.02
+    bird: 0, croc: 10, mass: 90
+  },
+  veloci: {   // Velociraptor: high-pitched, chittering, aggressive
+    sharpness: 25,        // 2.5
+    preemphasis: 85,      // 0.85
+    gate: 8,              // 0.08
+    sobel: 15,            // 1.5
+    temporal_smooth: 10,  // 1.0
+    jitter: 12,           // 0.12
+    bird: 50, croc: 50, mass: 0
+  },
+  trike: {    // Triceratops: warning honk, periodic, rhythmic
+    sharpness: 20,        // 2.0
+    preemphasis: 80,      // 0.80
+    gate: 15,             // 0.15
+    sobel: 10,            // 1.0
+    temporal_smooth: 18,  // 1.8
+    jitter: 8,            // 0.08
+    bird: 30, croc: 40, mass: 30
+  }
+};
+
+function loadPreset(dino) {
+  const p = DINO_PRESETS[dino];
+  if (!p) return;
+  
+  // Load audio quality parameters
+  document.getElementById('sharpness').value = p.sharpness;
+  document.getElementById('preemphasis').value = p.preemphasis;
+  document.getElementById('gate').value = p.gate;
+  document.getElementById('sobel_strength').value = p.sobel;
+  document.getElementById('temporal_smooth').value = p.temporal_smooth;
+  document.getElementById('jitter').value = p.jitter;
+  updateQuality();
+  
+  // Load blend weights
+  document.getElementById('bird').value = p.bird;
+  document.getElementById('croc').value = p.croc;
+  document.getElementById('mass').value = p.mass;
+  sliderIds.forEach(id => updateSlider(id));
+  
+  // Visual feedback
+  const dinoName = {trex: 'T-Rex', brachio: 'Brachiosaurus', veloci: 'Velociraptor', trike: 'Triceratops'}[dino];
+  errMsg.style.display = 'block';
+  errMsg.style.color = 'var(--green)';
+  errMsg.textContent = '✓ Loaded ' + dinoName + ' preset';
+  setTimeout(() => { errMsg.style.display = 'none'; }, 3000);
+}
+
+// ─── Synthesize ───────────────────────────────────────────────────────────────
+const synthBtn = document.getElementById('synth-btn');
+const spinner  = document.getElementById('spinner');
+const errMsg   = document.getElementById('error-msg');
+
+async function synthesize() {
+  if (!modelReady) { showError('Model is still loading, please wait…'); return; }
+
+  const weights = sliderIds.map(id => parseInt(document.getElementById(id).value));
+  const total   = weights.reduce((a,b) => a+b, 0);
+  if (total === 0) { showError('Set at least one weight above 0.'); return; }
+
+  const wInput = weights[0];
+  const hasFile = fileInput.files[0];
+  if (wInput > 0 && !hasFile) { showError("Set 'Your Sound' to 0 or upload an audio file first."); return; }
+
+  setBusy(true);
+  errMsg.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('w_input', weights[0]);
+  fd.append('w_bird',  weights[1]);
+  fd.append('w_croc',  weights[2]);
+  fd.append('w_mass',  weights[3]);
+  fd.append('sharpness',        (parseInt(document.getElementById('sharpness').value) / 10).toFixed(1));
+  fd.append('preemphasis',      (parseInt(document.getElementById('preemphasis').value) / 100).toFixed(2));
+  fd.append('gate',             (parseInt(document.getElementById('gate').value) / 100).toFixed(2));
+  fd.append('sobel_strength',   (parseInt(document.getElementById('sobel_strength').value) / 10).toFixed(1));
+  fd.append('temporal_smooth',  (parseInt(document.getElementById('temporal_smooth').value) / 10).toFixed(1));
+  fd.append('jitter',           (parseInt(document.getElementById('jitter').value) / 100).toFixed(2));
+  fd.append('n_jitter', '6');
+  if (hasFile) fd.append('audio', fileInput.files[0]);
+
+  try {
+    const resp = await fetch('/api/synthesize', { method: 'POST', body: fd });
+    const data = await resp.json();
+    if (!resp.ok) { showError(data.error || 'Server error'); setBusy(false); return; }
+    renderResults(data);
+  } catch(e) {
+    showError('Network error: ' + e.message);
+  } finally {
+    setBusy(false);
+  }
+}
+
+function renderResults(d) {
+  document.getElementById('results-placeholder').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+
+  // Synth
+  const synthWavUrl = 'data:audio/wav;base64,' + d.synth_wav;
+  document.getElementById('synth-spec-img').src = 'data:image/png;base64,' + d.synth_spec;
+  document.getElementById('synth-audio').src = synthWavUrl;
+  document.getElementById('dl-synth').href   = synthWavUrl;
+
+  // Input (optional)
+  const inputBlock = document.getElementById('input-spec-block');
+  if (d.input_spec && d.input_wav) {
+    const inWavUrl = 'data:audio/wav;base64,' + d.input_wav;
+    document.getElementById('input-spec-img').src = 'data:image/png;base64,' + d.input_spec;
+    document.getElementById('input-recon-audio').src = inWavUrl;
+    document.getElementById('dl-input').href = inWavUrl;
+    inputBlock.style.display = '';
+  } else {
+    inputBlock.style.display = 'none';
+  }
+
+  document.getElementById('z-norm').textContent = d.z_norm.toFixed(4);
+}
+
+function setBusy(v) {
+  synthBtn.disabled = v;
+  synthBtn.style.display = v ? 'none' : 'block';
+  spinner.style.display  = v ? 'block' : 'none';
+}
+
+function showError(msg) {
+  errMsg.textContent = '⚠ ' + msg;
+  errMsg.style.display = 'block';
+}
+</script>
+</body>
+</html>
