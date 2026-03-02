@@ -437,9 +437,8 @@ Commercial use welcome; cite the work.
 For questions, collaboration, or feedback:
 
 - **Author**: Rahul Raj
-- **Email**: [your email]
-- **Institution**: University College London, MSc Evolutionary Biology
-
+- **Email**: [rahulrajpvr7d.here@gmail.com]
+- **Institution**: University College London, MRes Creative Computing
 ---
 
 <div align="center">
