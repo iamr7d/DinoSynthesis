@@ -419,7 +419,7 @@ Commercial use welcome; cite the work.
 ## 🔗 Links & Resources
 
 - **GitHub**: https://github.com/iamr7d/DinoSynthesis
-- **Paper**: [link to MRES thesis when published]
+- **Paper**: 
 - **Audio Samples**: [link to Zenodo/OSF data deposit]
 - **Interactive Demo**: http://localhost:5050/latent (local only)
 
