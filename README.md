@@ -438,7 +438,7 @@ For questions, collaboration, or feedback:
 
 - **Author**: Rahul Raj
 - **Email**: [rahulrajpvr7d.here@gmail.com]
-- **Institution**: University College London, MRes Creative Computing
+- **Institution**: University of Arts London, MRes Creative Computing
 ---
 
 <div align="center">
