@@ -334,6 +334,102 @@ This decoupling proves that **morphological post-processing (Stage 4) is not cos
 
 ---
 
+## 🧭 Strategic Evolution Plan (Phase 2.0)
+
+> **Primary Objective:** Bridge the "Latent–Spectral Decoupling" by transforming the VAE-GAN from a black-box interpolator into a **Physics-Informed Phylogenetic Morphospace**.
+
+---
+
+### 🛠️ Phase 1: Metric Latent Regularization *(Addressing the "Adams Constraint")*
+
+**Problem:** Standard VAE latent spaces are often non-metric — Euclidean distance does not represent evolutionary time.  
+**Solution:** Implement **Phylogenetic Distance Matching (PDM)**.
+
+#### 1.1 Temporal Alignment Loss
+
+$$\mathcal{L}_{\text{phylo}} = \| \text{dist}(z_i, z_j) - k \cdot T_{ij} \|^2$$
+
+where $T_{ij}$ is the **patristic distance** (millions of years) between species $i$ and $j$.  
+**Goal:** Ensure the latent space geometry is a linear reflection of the Archosaur evolutionary tree.
+
+#### 1.2 Triplet Anchoring
+
+- Use Birds (Neornithes) and Crocodilians as **hard anchors**
+- Implement triplet loss to ensure *within-clade* variance < *between-clade* variance in the latent space
+
+---
+
+### 📈 Phase 2: Brownian Bridge Synthesis *(The "Ancestral State" Engine)*
+
+**Problem:** Simple linear interpolation ($0.5z_b + 0.5z_c$) ignores the stochastic nature of evolution.  
+**Solution:** Stochastic Ancestral State Estimation (SASE).
+
+#### 2.1 Latent Brownian Motion
+
+Replace deterministic lerp with a **Brownian Bridge simulation**:
+
+$$z(t) = (1-t)\,z_{\text{anc}} + t\,z_{\text{modern}} + \sigma\,W(t)$$
+
+**Output:** Instead of one `dino_synthesis.wav`, generate an ensemble of 20 samples representing the **probability cloud** of potential calls at the $t=0.5$ evolutionary midpoint.
+
+#### 2.2 Branch Length Conditioning
+
+Incorporate branch length (time) as a variance parameter. Deep-time reconstructions (dinosaurs) should have **higher latent "jitter"** than recent ancestors.
+
+---
+
+### 🛑 Phase 3: Morphological Masking *(The "Raup Constraint")*
+
+**Problem:** The decoder generates high-frequency "bird-like" whistles for high-mass organisms (5–7 tonnes).  
+**Solution:** **Mass–Frequency Coupling (MFC)**.
+
+#### 3.1 Physics-Informed Decoder
+
+- **Conditional Injection:** Pass $\log_{10}(\text{Mass})$ directly into the decoder's bottleneck
+- **The Raup Filter:** Implement a Differentiable Low-Pass Layer inside the network
+
+Cutoff frequency dynamically calculated:
+
+$$F_c \propto M^{-1/3}$$
+
+This forces the model to find **low-frequency solutions** during training — biologically mandatory for a 5–7 tonne organism.
+
+#### 3.2 Adversarial Mass Critique
+
+Update the **PatchGAN Discriminator** to be "Mass-Aware":  
+If the model generates a high-frequency transient for a high-mass latent, the Discriminator penalises it as *"Biologically Impossible."*
+
+---
+
+### 📊 Phase 4: Validation & Visualization
+
+**Goal:** Prove synthesis is grounded in both ML metrics and paleobiology.
+
+#### 4.1 The Raup Plot (Theoretical Morphospace)
+
+Visualise the **Occupied vs. Unoccupied** vocal space:
+- Plot Spectral Centroid vs. Mass
+- Identify the **"Viable Sliver"** of dinosaur vocalizations in acoustic–mass space
+
+#### 4.2 FEA Cross-Validation
+
+Use existing Finite Element Analysis (FEA) data from *Parasaurolophus* or *T. rex* CT scans as **ground-truth markers** in the latent space.
+
+---
+
+### 📅 Implementation Roadmap (Immediate Sprints)
+
+| Sprint | Task | Target File |
+|--------|------|-------------|
+| **Sprint A** | Implement `PhyloDistanceLoss` | `model/losses.py` |
+| **Sprint B** | Refactor Decoder for Mass-Conditioning | `model/dino_vae.py` |
+| **Sprint C** | Develop Brownian Ensemble Script | `synthesize_ensemble.py` |
+| **Sprint D** | Generate the "Raup Constraint" Report | `research_output/` |
+
+> *"The fossil record tells us what was; the latent space tells us what could have been. The Raup Constraint ensures we don't imagine the impossible."*
+
+---
+
 ## 📚 Conceptual Framework
 
 ### Phylogenetic Interpolation vs. Class Averaging
