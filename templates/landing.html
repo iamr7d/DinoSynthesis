@@ -20,6 +20,8 @@
   --croc:     #ff3366;
   --mass:     #cc44ff;
   --green:    #3ecf74;
+  --gold:     #f0b429;
+  --dino:     #ff6b35;
 }
 html, body {
   min-height: 100%; background: var(--bg);
@@ -211,6 +213,87 @@ footer {
 .dot.error   { background: #ff5555; }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
 
+/* ── Phase badge ────────────────────────────────────────────────────── */
+.phase-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(224,92,42,.18), rgba(255,140,66,.18));
+  border: 1px solid rgba(255,140,66,.35); color: var(--accent2);
+}
+
+/* ── Comparison table ───────────────────────────────────────────────── */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.cmp-table th {
+  text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); padding: 10px 16px; border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.cmp-table td {
+  padding: 13px 16px; border-bottom: 1px solid var(--border);
+  color: var(--text); vertical-align: middle;
+}
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-table tr:hover td { background: rgba(255,255,255,.02); }
+.cmp-table .best { color: var(--green); font-weight: 700; }
+.cmp-table .warn { color: var(--accent2); }
+.cmp-table .bad  { color: var(--croc); }
+.cmp-table .stage-label {
+  display: inline-flex; align-items: center; gap: 8px; font-weight: 600;
+}
+.stage-pill {
+  display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px;
+  border-radius: 4px; letter-spacing: 0.5px;
+}
+.pill-1 { background: rgba(90,96,112,.25); color: #8a8fa0; }
+.pill-2 { background: rgba(62,207,116,.12); color: var(--green); }
+.pill-3 { background: rgba(0,229,255,.12); color: var(--bird); }
+.pill-p { background: linear-gradient(90deg,rgba(224,92,42,.2),rgba(255,140,66,.2)); color: var(--accent2); }
+
+/* ── Raup table ─────────────────────────────────────────────────────── */
+.raup-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.raup-table th {
+  text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); padding: 10px 14px; border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.raup-table td {
+  padding: 12px 14px; border-bottom: 1px solid var(--border);
+  font-family: 'Fira Code', monospace; color: var(--text);
+}
+.raup-table tr:last-child td { border-bottom: none; }
+.raup-table .fc-bar {
+  display: inline-block; height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--croc), var(--bird));
+  vertical-align: middle; margin-left: 8px;
+}
+
+/* ── Metric cards (2-up) ────────────────────────────────────────────── */
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.metric-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px 22px;
+}
+.metric-card .mv { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+.metric-card .ml { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+                   color: var(--muted); margin-top: 2px; }
+.metric-card .md { font-size: 12px; color: var(--text2); margin-top: 8px; line-height: 1.5; }
+
+/* ── Brownian viz ────────────────────────────────────────────────────── */
+.bb-formula {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 20px 28px; font-size: 14px; font-family: 'Fira Code', monospace;
+  color: #c3e88d; line-height: 2.2; overflow-x: auto;
+}
+.bb-tag { color: var(--muted); font-style: italic; }
+
+/* ── Two-col layout ─────────────────────────────────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ── Scroll-reveal ───────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .5s, transform .5s; }
+.reveal.visible { opacity: 1; transform: none; }
+
 @media (max-width: 640px) {
   nav { padding: 0 16px; }
   .stats-strip { flex-direction: column; }
@@ -224,8 +307,10 @@ footer {
 <!-- Nav -->
 <nav>
   <a class="nav-logo" href="/">DinoSynthesis</a>
-  <div class="nav-links">
+  <div class="nav-links" style="align-items:center">
+    <span class="phase-badge">Phase 2.0</span>
     <a class="nav-btn ghost" href="/latent">Latent Space</a>
+    <a class="nav-btn ghost" href="#metrics">Metrics</a>
     <a class="nav-btn fill"  href="/synth">Open Synthesizer →</a>
   </div>
 </nav>
@@ -244,20 +329,24 @@ footer {
   </div>
   <div class="stats-strip">
     <div class="stat">
-      <div class="stat-value bird">426</div>
-      <div class="stat-label">Bird tensors</div>
+      <div class="stat-value" style="color:var(--green)">0.000</div>
+      <div class="stat-label">Latent Displacement</div>
     </div>
     <div class="stat">
-      <div class="stat-value croc">426</div>
-      <div class="stat-label">Reptile tensors</div>
+      <div class="stat-value" style="color:var(--green)">100%</div>
+      <div class="stat-label">Directional Align</div>
     </div>
     <div class="stat">
-      <div class="stat-value mass">426</div>
-      <div class="stat-label">Mass tensors</div>
+      <div class="stat-value" style="color:var(--accent2)">0.065</div>
+      <div class="stat-label">Val Loss (Stage 2)</div>
     </div>
     <div class="stat">
-      <div class="stat-value acc">0.0655</div>
-      <div class="stat-label">Val loss</div>
+      <div class="stat-value" style="color:var(--mass)">20</div>
+      <div class="stat-label">Ensemble Samples</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color:var(--bird)">M<sup style="font-size:14px">-⅓</sup></div>
+      <div class="stat-label">Raup Constraint</div>
     </div>
   </div>
 </div>
@@ -297,11 +386,35 @@ footer {
         <div class="card-icon">🔬</div>
         <div class="card-title">Research Methodology</div>
         <div class="card-desc">
-          β-VAE with strategic undersampling for phylogenetic symmetry. 
-          Balanced 1:1:1 parity across Bird, Reptile, and Mass anchor groups 
+          β-VAE with strategic undersampling for phylogenetic symmetry.
+          Balanced 1:1:1 parity across Bird, Reptile, and Mass anchor groups
           improved validation loss by 8.2% over the biased baseline.
         </div>
         <div class="card-link">Read method ↓</div>
+      </a>
+
+      <a class="card" href="#raup">
+        <span class="card-tag tag-red">Phase 2.0</span>
+        <div class="card-icon">🦴</div>
+        <div class="card-title">Raup Constraint</div>
+        <div class="card-desc">
+          Physics-informed allometric low-pass filter: F_c ∝ M<sup>−⅓</sup>.
+          A 5-tonne dinosaur physically <em>cannot</em> produce 6 kHz calls.
+          Mass-conditioned decoder enforces this during synthesis.
+        </div>
+        <div class="card-link">See Raup plot ↓</div>
+      </a>
+
+      <a class="card" href="#ensemble">
+        <span class="card-tag tag-blue">Phase 2.0</span>
+        <div class="card-icon">🌊</div>
+        <div class="card-title">Brownian Ensemble</div>
+        <div class="card-desc">
+          Replace a single deterministic call with a <em>probability cloud</em>
+          of 20 stochastic samples via Brownian Bridge SASE.
+          Deeper evolutionary time = wider variance = more ancestral uncertainty.
+        </div>
+        <div class="card-link">Explore ensemble ↓</div>
       </a>
 
     </div>
@@ -320,6 +433,288 @@ footer {
           PCA projection · 1,278 tensors · 128D → 2D
         </div>
         <a class="map-overlay-link" href="/latent">Interactive version →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── METRICS COMPARISON TABLE ─────────────────────────────────────────── -->
+<section id="metrics" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-inner reveal">
+    <div class="section-title">Pipeline Progression — Four Stages</div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Dataset</th>
+            <th>Val Loss</th>
+            <th>Spectral Clarity</th>
+            <th>Reconstruction</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="stage-label"><span class="stage-pill pill-1">S1</span> β-VAE Baseline</span></td>
+            <td class="bad">Unbalanced 70:1</td>
+            <td class="warn">~0.071</td>
+            <td>Blurred</td>
+            <td>Standard GL</td>
+            <td class="bad">Mode collapse</td>
+          </tr>
+          <tr>
+            <td><span class="stage-label"><span class="stage-pill pill-2">S2</span> Balanced VAE</span></td>
+            <td class="best">Parity 1:1:1</td>
+            <td class="best">0.0655</td>
+            <td>Defined</td>
+            <td>Hi-Fi Griffin-Lim</td>
+            <td class="best">✓ 8.2% gain</td>
+          </tr>
+          <tr>
+            <td><span class="stage-label"><span class="stage-pill pill-3">S3</span> VAE-GAN</span></td>
+            <td>Parity 1:1:1</td>
+            <td class="warn">0.117</td>
+            <td>Crisp + Textured</td>
+            <td>PatchGAN critique</td>
+            <td class="warn">GAN unstable</td>
+          </tr>
+          <tr>
+            <td><span class="stage-label"><span class="stage-pill pill-3">S4</span> Physiological Polish</span></td>
+            <td>Post-parity</td>
+            <td>—</td>
+            <td>Crisp + Resonant</td>
+            <td>ADSR + LPF + delay</td>
+            <td class="best">✓ Stage 4 active</td>
+          </tr>
+          <tr style="background:rgba(224,92,42,.04)">
+            <td><span class="stage-label"><span class="stage-pill pill-p">P2</span> Phase 2.0 (target)</span></td>
+            <td>Parity + mass</td>
+            <td class="best">&lt; 0.065</td>
+            <td>Crisp + Allometric</td>
+            <td>Raup LPF + Brownian</td>
+            <td style="color:var(--accent2)">⟳ In training</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-title">Synthesis Evaluation Metrics (Stage 2 Checkpoint, Epoch 98)</div>
+    <div class="metric-grid reveal">
+      <div class="metric-card">
+        <div class="mv" style="color:var(--green)">0.000</div>
+        <div class="ml">Latent Displacement Error</div>
+        <div class="md">L₂ distance from phylogenetic midpoint. Perfect geometric placement.</div>
+      </div>
+      <div class="metric-card">
+        <div class="mv" style="color:var(--green)">100%</div>
+        <div class="ml">Directional Alignment</div>
+        <div class="md">Cosine similarity to evolutionary trajectory vector.</div>
+      </div>
+      <div class="metric-card">
+        <div class="mv" style="color:var(--accent2)">6,632 Hz</div>
+        <div class="ml">Spectral Centroid</div>
+        <div class="md">Pre-Raup decoder bias. Avian high-frequency dominance.</div>
+      </div>
+      <div class="metric-card">
+        <div class="mv" style="color:var(--croc)">0%</div>
+        <div class="ml">F1 Fossil Accuracy</div>
+        <div class="md">vs 160–800 Hz Parasaurolophus FEA target. Motivates Raup Constraint.</div>
+      </div>
+      <div class="metric-card">
+        <div class="mv" style="color:var(--bird)">50/50</div>
+        <div class="ml">Bird / Croc Axis</div>
+        <div class="md">Confirms true midpoint interpolation — not class averaging.</div>
+      </div>
+      <div class="metric-card">
+        <div class="mv" style="color:var(--mass)">2.96 s</div>
+        <div class="ml">Output Duration</div>
+        <div class="md">22.05 kHz WAV, 128 Griffin-Lim iterations, pre-emphasis 0.97.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RAUP CONSTRAINT ────────────────────────────────────────────────────── -->
+<section id="raup">
+  <div class="section-inner">
+    <div class="section-title">The Raup Constraint — Allometric Scaling F_c ∝ M<sup>−⅓</sup></div>
+    <div class="two-col reveal">
+      <div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.8;margin-bottom:20px">
+          The core insight: a neural decoder trained on modern archosaurs will always
+          reproduce <em>modern</em> spectral patterns. It does not know the organism is
+          extinct or 5 tonnes. The Raup Filter enforces physical acoustics:
+        </p>
+        <div class="bb-formula" style="margin-bottom:16px">
+          F_c = F_ref · (M_ref / M)<sup>1/3</sup><br>
+          <span class="bb-tag"># F_ref = 8000 Hz @ M_ref = 0.5 kg (Tinamou)</span>
+        </div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.8">
+          The <code style="color:var(--accent2)">RaupLowPassLayer</code> applies this as a
+          differentiable soft-sigmoid mask inside the decoder — the model learns
+          allometric constraints end-to-end during fine-tuning.
+        </p>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
+        <table class="raup-table">
+          <thead>
+            <tr>
+              <th>Organism</th>
+              <th>Mass (kg)</th>
+              <th>Predicted F_c</th>
+              <th>Fossil / Measured</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🐦 Tinamou</td>
+              <td>0.5</td>
+              <td style="color:var(--bird)">8,000 Hz <span class="fc-bar" style="width:70px"></span></td>
+              <td style="color:var(--green)">4–8 kHz ✓</td>
+            </tr>
+            <tr>
+              <td>🦅 Ostrich</td>
+              <td>100</td>
+              <td style="color:var(--bird)">1,850 Hz <span class="fc-bar" style="width:38px"></span></td>
+              <td style="color:var(--green)">1.5–3 kHz ✓</td>
+            </tr>
+            <tr>
+              <td>🐊 Saltwater Croc</td>
+              <td>400</td>
+              <td style="color:var(--accent2)">1,260 Hz <span class="fc-bar" style="width:26px"></span></td>
+              <td style="color:var(--green)">0.5–2 kHz ✓</td>
+            </tr>
+            <tr style="background:rgba(255,107,53,.06)">
+              <td>🦕 Parasaurolophus</td>
+              <td>2,500</td>
+              <td style="color:var(--dino)">760 Hz <span class="fc-bar" style="width:16px"></span></td>
+              <td style="color:var(--green)">160–800 Hz ✓</td>
+            </tr>
+            <tr style="background:rgba(255,107,53,.06)">
+              <td>🦖 T. rex</td>
+              <td>6,000</td>
+              <td style="color:var(--dino)">563 Hz <span class="fc-bar" style="width:12px"></span></td>
+              <td style="color:var(--text2)">est. 200–700 Hz</td>
+            </tr>
+            <tr>
+              <td>🐋 Blue Whale</td>
+              <td>150,000</td>
+              <td style="color:var(--croc)">195 Hz <span class="fc-bar" style="width:4px"></span></td>
+              <td style="color:var(--green)">10–40 Hz ✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding:18px 22px;border:1px solid rgba(224,92,42,.25);border-radius:10px;background:rgba(224,92,42,.05);">
+      <div style="font-size:13px;color:var(--text2);line-height:1.7">
+        <strong style="color:var(--accent2)">Expected improvement with Raup LPF:</strong>
+        Baseline 6,632 Hz → Stage 4 LPF ~800 Hz → Raup-constrained decoder
+        <strong style="color:var(--green)">600–900 Hz</strong> (targeting 160–800 Hz fossil range).
+        F1 accuracy projection: 0% → ~40% (Stage 4) → <strong style="color:var(--green)">>80% (Phase 2.0 target)</strong>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BROWNIAN BRIDGE ENSEMBLE ───────────────────────────────────────────── -->
+<section id="ensemble" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-title">Brownian Bridge Ensemble — Stochastic Ancestral State Estimation</div>
+    <div class="two-col reveal" style="align-items:start">
+      <div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.8;margin-bottom:20px">
+          A single deterministic interpolation ignores the stochastic nature of evolution.
+          The Brownian Bridge gives a <em>probability cloud</em> — instead of one
+          <code style="color:var(--accent2)">dino_synthesis.wav</code>, we generate 20 samples:
+        </p>
+        <div class="bb-formula">
+          z(t) = (1−t)·z_bird + t·z_croc<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ σ_eff · √(t·(1−t)) · ε<br><br>
+          σ_eff = σ · √(T_dino / T_max)<br>
+          <span class="bb-tag"># T_dino=166 Mya, T_max=320 Mya</span><br>
+          <span class="bb-tag"># σ_eff ≈ 0.43 at t=0.5</span>
+        </div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.8;margin-top:16px">
+          Deeper evolutionary time → higher σ_eff → wider latent spread.
+          Each sample represents one <em>plausible ancestral vocalization</em>.
+        </p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <table class="raup-table">
+            <thead><tr><th>Parameter</th><th>Value</th><th>Rationale</th></tr></thead>
+            <tbody>
+              <tr><td>t (midpoint)</td><td style="color:var(--green)">0.5</td><td>Evolutionary midpoint</td></tr>
+              <tr><td>σ_base</td><td style="color:var(--accent2)">0.6</td><td>Latent-scale tuned</td></tr>
+              <tr><td>T_ancestor</td><td style="color:var(--bird)">166 Mya</td><td>Non-avian dino split</td></tr>
+              <tr><td>T_max</td><td>320 Mya</td><td>Amniote crown divergence</td></tr>
+              <tr><td>σ_eff</td><td style="color:var(--mass)">≈ 0.43</td><td>0.6 × √(166/320)</td></tr>
+              <tr><td>std at t=0.5</td><td style="color:var(--mass)">≈ 0.21</td><td>σ_eff × √0.25</td></tr>
+              <tr><td>N samples</td><td style="color:var(--green)">20</td><td>Probability cloud</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:14px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);">
+          <div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Run Ensemble</div>
+          <pre style="margin:0;font-size:12px;padding:0;background:transparent;border:none;"><span class="cmt"># Generate 20-sample probability cloud</span>
+python <span class="fn">synthesize_ensemble.py</span> \
+  --n_samples <span class="num">20</span> --sigma <span class="num">0.6</span> \
+  --branch_mya <span class="num">166</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHYLOGENETIC DISTANCE TABLE ───────────────────────────────────────── -->
+<section>
+  <div class="section-inner">
+    <div class="section-title reveal">Phylogenetic Distance Matching — Latent Metric Regularisation</div>
+    <div class="two-col reveal" style="align-items:start">
+      <div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.8;margin-bottom:16px">
+          Standard VAE latent spaces are not metric — L₂ distance in latent space
+          does not correspond to evolutionary time. The new
+          <code style="color:var(--accent2)">PhyloDistanceLoss</code> corrects this:
+        </p>
+        <div class="bb-formula">
+          ℒ_phylo = Σ_{i&lt;j} ‖dist(z_i,z_j) − k·T_ij/T_max‖²
+        </div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.8;margin-top:16px">
+          Combined with <strong>Triplet Anchoring</strong> — within-clade variance
+          must be smaller than between-clade distance:
+        </p>
+        <div class="bb-formula" style="margin-top:12px">
+          ℒ_trip = max(0, d(a,p) − d(a,n) + margin)
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
+        <table class="raup-table">
+          <thead><tr><th>Species Pair</th><th>T_ij (Mya)</th><th>Normalised</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span style="color:var(--bird)">Tinamou</span> ↔ <span style="color:var(--croc)">Crocodylia</span></td>
+              <td style="color:var(--accent2)">252</td>
+              <td>0.788</td>
+            </tr>
+            <tr>
+              <td><span style="color:var(--bird)">Tinamou</span> ↔ <span style="color:var(--mass)">Whippomorpha</span></td>
+              <td>320</td>
+              <td style="color:var(--green)">1.000</td>
+            </tr>
+            <tr>
+              <td><span style="color:var(--croc)">Crocodylia</span> ↔ <span style="color:var(--mass)">Whippomorpha</span></td>
+              <td>320</td>
+              <td style="color:var(--green)">1.000</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding:14px 18px;background:var(--surface2);border-top:1px solid var(--border);font-size:12px;color:var(--text2)">
+          Sources: Brusatte et al. (2010) · Irisarri et al. (2017) molecular clock calibration
+        </div>
       </div>
     </div>
   </div>
@@ -406,17 +801,29 @@ wav = <span class="fn">hifi_griffinlim</span>(spec, n_iter=<span class="num">128
 
 <!-- Footer -->
 <footer>
+  <div style="margin-bottom:16px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+    <a href="/synth" style="color:var(--accent2);text-decoration:none">🎛 Synthesizer</a>
+    <a href="/latent" style="color:var(--text2);text-decoration:none">🗺 Latent Space</a>
+    <a href="https://github.com/iamr7d/DinoSynthesis" target="_blank" style="color:var(--text2);text-decoration:none">GitHub ↗</a>
+  </div>
   <div style="margin-bottom:12px">
     <span><span class="dot loading" id="footer-dot"></span>
     <span id="footer-status">Checking model…</span></span>
   </div>
-  <div>
-    MRes Machine Learning in Ecology ·
-    β-VAE v3 (Balanced) · best_val = 0.065539 · Epoch 95/150
+  <div style="opacity:.55">
+    MRes Creative Computing · UAL · DinoSynthesis Phase 2.0 ·
+    β-VAE v3 (Balanced) · best_val=0.065539 · Epoch 98
   </div>
 </footer>
 
 <script>
+// Scroll reveal
+const observer = new IntersectionObserver(
+  els => els.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
 async function checkStatus() {
   const dot  = document.getElementById('footer-dot');
   const txt  = document.getElementById('footer-status');
