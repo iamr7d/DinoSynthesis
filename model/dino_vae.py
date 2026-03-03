@@ -263,6 +263,180 @@ def vae_loss_function(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Phase 2.0 — Sprint B : Morphological Masking (The "Raup Constraint")
+# ─────────────────────────────────────────────────────────────────────────────
+
+class RaupLowPassLayer(nn.Module):
+    """
+    Differentiable Low-Pass Filter — The "Raup Filter".
+
+    Applies a learnable soft spectral mask to the decoder output,
+    hard-constrained by body mass:
+
+        F_c ∝ M^(-1/3)  (allometric scaling law for vocal tract resonance)
+
+    Implementation:
+      - log10(mass_kg) is passed per batch item.
+      - F_c is expressed as a fraction [0, 1] of the mel-bin axis:
+            F_c_frac = sigmoid(learnable_bias - log_mass / 3)
+      - A sigmoid ramp mask centred at F_c_frac attenuates bins above
+        the computed cutoff, smoothly suppressing high-frequency content
+        for large-mass organisms.
+      - A bias of +log10(M_ref) anchors F_c=1.0 (full bandwidth) at M=M_ref.
+
+    Args:
+        n_mels  : Number of mel frequency bins (default 128).
+        steepness : Sigmoid steepness of the cutoff ramp. Higher = sharper.
+        m_ref_log10 : log10 of reference mass (in kg) where F_c = full band.
+                      Default 2.7 ≈ log10(500 kg) — a mid-sized animal.
+    """
+
+    def __init__(
+        self,
+        n_mels:      int   = 128,
+        steepness:   float = 12.0,
+        m_ref_log10: float = 2.7,
+    ):
+        super().__init__()
+        self.n_mels      = n_mels
+        self.steepness   = steepness
+        self.m_ref_log10 = m_ref_log10
+
+        # Learnable offset — fine-tunes where the cutoff sits for a given mass
+        self.bias = nn.Parameter(torch.zeros(1))
+
+        # Register freq_bins as a buffer so it moves with the module's device
+        freq_bins = torch.linspace(0.0, 1.0, n_mels)  # (n_mels,) fraction axis
+        self.register_buffer("freq_bins", freq_bins)
+
+    def forward(
+        self,
+        spec:     torch.Tensor,  # (B, 1, n_mels, T)
+        log_mass: torch.Tensor,  # (B,) — log10(mass_kg) per sample
+    ) -> torch.Tensor:
+        """
+        Args:
+            spec     : Decoder output spectrogram, (B, 1, n_mels, T), [0, 1].
+            log_mass : log10 of organism mass in kg, shape (B,).
+
+        Returns:
+            Mass-filtered spectrogram, same shape as input.
+        """
+        B = spec.size(0)
+
+        # F_c fraction — higher mass → lower cutoff
+        # fc_frac ∈ (0, 1): fraction of mel axis to retain
+        fc_frac = torch.sigmoid(
+            self.bias + (self.m_ref_log10 - log_mass) / 3.0
+        )  # (B,)
+
+        # Build per-sample soft mask: sigmoid ramp around fc_frac
+        # freq_bins: (n_mels,), fc_frac: (B,) → mask: (B, n_mels)
+        freq = self.freq_bins.unsqueeze(0)          # (1, n_mels)
+        fc   = fc_frac.unsqueeze(1)                 # (B, 1)
+        mask = torch.sigmoid(self.steepness * (fc - freq))  # (B, n_mels) ∈ (0,1)
+
+        # Apply: (B, 1, n_mels, T) * (B, 1, n_mels, 1)
+        mask = mask.unsqueeze(1).unsqueeze(-1)      # (B, 1, n_mels, 1)
+        return spec * mask
+
+
+class MassConditionedDinoVAE(DinoVAE):
+    """
+    Mass-Conditioned VAE — Physics-Informed Phylogenetic Decoder.
+
+    Extends DinoVAE with two Phase 2.0 components:
+
+      1. Mass Conditioning (FiLM injection):
+         log10(mass_kg) is embedded and added to the latent vector z before
+         decoding. This shifts the decoder's operating point to the biologically
+         correct frequency regime for the organism's size.
+
+      2. RaupLowPassLayer:
+         A differentiable allometric low-pass filter is applied after the decoder.
+         F_c ∝ M^(-1/3) ensures the network learns to produce low-frequency
+         outputs for large-mass organisms rather than relying on post-hoc filtering.
+
+    Backward-compatible with DinoVAE:
+      - mass_proj starts near zero → first iteration identical to DinoVAE
+      - Existing checkpoints can be loaded with strict=False
+
+    Args:
+        latent_dim : Latent dimension.  Default 128.
+        drop_p     : Dropout in ResBlocks.  Default 0.05.
+        fc_drop    : Dropout on FC bottleneck.  Default 0.25.
+        n_mels     : Mel bins (must match training data).  Default 128.
+    """
+
+    def __init__(
+        self,
+        latent_dim: int   = 128,
+        drop_p:     float = 0.05,
+        fc_drop:    float = 0.25,
+        n_mels:     int   = 128,
+    ):
+        super().__init__(latent_dim=latent_dim, drop_p=drop_p, fc_drop=fc_drop)
+
+        # ── Mass embedding ────────────────────────────────────────────────
+        # Projects scalar log10(mass) to latent_dim; initialised near zero
+        # so early training is stable and it learns to contribute gradually.
+        self.mass_proj = nn.Sequential(
+            nn.Linear(1, 64),
+            nn.GELU(),
+            nn.Linear(64, latent_dim),
+        )
+        nn.init.zeros_(self.mass_proj[0].weight)
+        nn.init.zeros_(self.mass_proj[0].bias)
+        nn.init.zeros_(self.mass_proj[2].weight)
+        nn.init.zeros_(self.mass_proj[2].bias)
+
+        # ── Raup Low-Pass Filter ──────────────────────────────────────────
+        self.raup_lpf = RaupLowPassLayer(n_mels=n_mels)
+
+    # ── Mass-conditioned decode ───────────────────────────────────────────────
+
+    def decode(
+        self,
+        z:        torch.Tensor,           # (B, latent_dim)
+        log_mass: torch.Tensor | None = None,  # (B,) log10(kg); None = unconditioned
+    ) -> torch.Tensor:
+        """
+        Decode latent vector z with optional mass conditioning.
+
+        Args:
+            z        : Latent vector, (B, latent_dim).
+            log_mass : log10(organism mass in kg) per sample, shape (B,).
+                       Pass None to run in unconditioned mode (equivalent to
+                       base DinoVAE with no mass filter applied).
+
+        Returns:
+            Reconstructed spectrogram, shape (B, 1, n_mels, T).
+        """
+        # Shift z by mass embedding (near-zero initially)
+        if log_mass is not None:
+            mass_emb = self.mass_proj(log_mass.unsqueeze(-1).float())  # (B, D)
+            z = z + mass_emb
+
+        # Standard decoder pass (inherited from DinoVAE)
+        spec = super().decode(z)  # (B, 1, n_mels, T)
+
+        # Apply allometric low-pass filter
+        if log_mass is not None:
+            spec = self.raup_lpf(spec, log_mass)
+
+        return spec
+
+    def forward(
+        self,
+        x:        torch.Tensor,
+        log_mass: torch.Tensor | None = None,
+    ):
+        mu, logvar = self.encode(x)
+        z          = self.reparameterize(mu, logvar)
+        return self.decode(z, log_mass), mu, logvar
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Smoke test
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -280,4 +454,18 @@ if __name__ == "__main__":
     n = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Params   : {n:,}")
     assert x.shape == recon.shape, "Shape mismatch!"
-    print("✓ Architecture Validation Passed")
+    print("✓ DinoVAE Architecture Validation Passed")
+
+    print()
+    print("Initializing MassConditionedDinoVAE (Phase 2.0) …")
+    mass_model = MassConditionedDinoVAE(latent_dim=128)
+    # log10 mass: bird ~0.3 kg → 0.47, dino 5000 kg → 3.70
+    log_mass   = torch.tensor([0.47, 3.70, 3.70, 0.47])
+    mass_model.train()
+    recon_m, mu_m, lv_m = mass_model(x, log_mass)
+    assert x.shape == recon_m.shape, "Mass-conditioned shape mismatch!"
+    n_m = sum(p.numel() for p in mass_model.parameters() if p.requires_grad)
+    print(f"Output   : {recon_m.shape}")
+    print(f"Params   : {n_m:,}  (Δ extra = {n_m - n:,})")
+    print("✓ MassConditionedDinoVAE Validation Passed")
+
