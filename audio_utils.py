@@ -99,6 +99,16 @@ def sharpen_spectrogram(spec: np.ndarray, power: float = 1.5,
         s = ndi.gaussian_filter1d(s, sigma=temporal_smooth, axis=1)
         s = np.clip(s, 0.0, 1.0)
 
+    # a2: dynamic-range normalisation — stretch spectrogram to full [0,1] range.
+    #     VAE decoders often output a raised floor (e.g. min≈0.32).  Without
+    #     this step the gate threshold operates on the wrong scale and does
+    #     nothing, leaving constant background noise through Griffin-Lim.
+    s_floor = np.percentile(s, 2)        # 2nd-percentile as true silence floor
+    s_ceil  = np.percentile(s, 99)       # 99th-percentile as peak
+    if s_ceil - s_floor > 1e-4:
+        s = (s - s_floor) / (s_ceil - s_floor)
+        s = np.clip(s, 0.0, 1.0)
+
     # b: spectral gate
     if gate > 0:
         s = spectral_gate(s, threshold=gate)
@@ -129,10 +139,10 @@ def sharpen_spectrogram(spec: np.ndarray, power: float = 1.5,
 def hifi_griffinlim(spec_01: np.ndarray,
                     n_iter: int = 128,
                     preemphasis_coef: float = 0.97,
-                    sharpness: float = 0.0,
-                    gate: float = 0.0,
+                    sharpness: float = 1.8,
+                    gate: float = 0.15,
                     sobel_strength: float = 0.0,
-                    temporal_smooth: float = 0.0) -> np.ndarray:
+                    temporal_smooth: float = 1.0) -> np.ndarray:
     """
     [0,1] normalised log-mel spectrogram → audio waveform.
 
@@ -194,10 +204,10 @@ def hifi_griffinlim(spec_01: np.ndarray,
 def save_wav(spec_01: np.ndarray, out_path: str,
              n_iter: int = 128,
              preemphasis_coef: float = 0.97,
-             sharpness: float = 0.0,
-             gate: float = 0.0,
+             sharpness: float = 1.8,
+             gate: float = 0.15,
              sobel_strength: float = 0.0,
-             temporal_smooth: float = 0.0) -> np.ndarray:
+             temporal_smooth: float = 1.0) -> np.ndarray:
     """Synthesise audio from a [0,1] mel spectrogram and write to disk."""
     audio = hifi_griffinlim(spec_01, n_iter=n_iter,
                              preemphasis_coef=preemphasis_coef,
@@ -220,10 +230,10 @@ def save_wav(spec_01: np.ndarray, out_path: str,
 def wav_bytes(spec_01: np.ndarray,
               n_iter: int = 128,
               preemphasis_coef: float = 0.97,
-              sharpness: float = 0.0,
-              gate: float = 0.0,
+              sharpness: float = 1.8,
+              gate: float = 0.15,
               sobel_strength: float = 0.0,
-              temporal_smooth: float = 0.0) -> bytes:
+              temporal_smooth: float = 1.0) -> bytes:
     """Return WAV file contents as bytes without touching disk."""
     audio = hifi_griffinlim(spec_01, n_iter=n_iter,
                              preemphasis_coef=preemphasis_coef,
