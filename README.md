@@ -137,10 +137,10 @@ python synthesize.py --jitter 0.05 --n_jitter 12
 ```
 
 **Outputs:**
-- `output_synthesis/dino_100pct_bird.wav` — pure bird anchor
-- `output_synthesis/dino_100pct_croc.wav` — pure croc anchor
-- `output_synthesis/dino_synthesis.wav` — **interpolated dinosaur**
-- `output_synthesis/dino_spectrogram_comparison.png` — visual comparison
+- `output_synthesis/dino_100pct_bird.wav` — pure bird anchor (2.96 s, 22.05 kHz)
+- `output_synthesis/dino_100pct_croc.wav` — pure croc anchor (2.96 s, 22.05 kHz)
+- `output_synthesis/dino_synthesis.wav` — **🦖 interpolated dinosaur** (2.96 s, 22.05 kHz)
+- `output_synthesis/dino_spectrogram_comparison.png` — visual spectrogram side-by-side
 
 ### Quantitative Evaluation
 
@@ -168,6 +168,60 @@ python app.py
 # - Click-to-synthesize any point in the space
 # - AI animal image generation (SDXL-Turbo)
 # - Spectrum analyzer and waveform display
+```
+
+---
+
+## 🎵 Audio Outputs & Media Gallery
+
+### Generated Synthesis Files
+
+**Location:** `output_synthesis/`
+
+#### Audio Samples (WAV format, 2.96s each @ 22.05 kHz)
+
+| File | Description | Acoustic Character |
+|------|-------------|--------------------|
+| `dino_100pct_bird.wav` | **Bird Anchor** — Pure Tinamou tinamus | High-frequency whistles, sibilants, articulate chirps |
+| `dino_100pct_croc.wav` | **Croc Anchor** — Pure Crocodylia | Low-frequency growls, guttural rumbles, power |
+| `dino_synthesis.wav` | **🦖 DINOSAUR** — 50% Bird + 50% Croc + Mass | Hybrid: bird articulation + croc power + body resonance |
+
+#### Spectrogram Comparison
+
+**File:** `dino_spectrogram_comparison.png`
+
+Visualize the three anchor points and their interpolation:
+- **Left**: Bird spectrum (energy concentrated in 2–8 kHz, high-frequency detail)
+- **Center**: Dinosaur synthesis (blend of bird articulation with extended low-frequency)
+- **Right**: Croc spectrum (energy in 0.5–3 kHz, dominant low-frequency guttural)
+
+The dinosaur spectrogram visually represents the evolutionary "missing link" between avian and reptilian vocalisations.
+
+### How to Listen
+
+```bash
+# Play dinosaur vocalization
+ffplay output_synthesis/dino_synthesis.wav
+
+# Or use any audio player
+aplay output_synthesis/dino_synthesis.wav         # Linux
+play output_synthesis/dino_synthesis.wav          # macOS (sox)
+start output_synthesis/dino_synthesis.wav         # Windows
+```
+
+### How to View Spectrograms
+
+```bash
+# View the comparison figure
+open output_synthesis/dino_spectrogram_comparison.png    # macOS
+eog output_synthesis/dino_spectrogram_comparison.png     # Linux (Eye of GNOME)
+feh output_synthesis/dino_spectrogram_comparison.png     # Linux (feh)
+```
+
+Or view in your browser:
+```bash
+python -m http.server 8000 &
+# Then open: http://localhost:8000/output_synthesis/
 ```
 
 ---
@@ -213,7 +267,12 @@ DinoSynthesis/
 │   ├── js/three.min.js                      # Three.js r128 (local, no CDN)
 │   └── js/OrbitControls.js                  # Camera controls
 │
-├── output_synthesis/                        # Generated WAVs & spectrograms
+├── output_synthesis/
+│   ├── dino_100pct_bird.wav                # Pure bird anchor audio (2.96s)
+│   ├── dino_100pct_croc.wav                # Pure croc anchor audio (2.96s)
+│   ├── dino_synthesis.wav                  # 🦖 DINOSAUR VOCALIZATION (2.96s)
+│   └── dino_spectrogram_comparison.png     # Visual comparison (3 spectrograms)
+│
 ├── logs/                                    # Training logs & metrics
 └── requirements.txt                         # Python dependencies
 ```
